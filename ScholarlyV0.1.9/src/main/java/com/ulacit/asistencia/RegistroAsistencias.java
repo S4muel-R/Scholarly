@@ -16,6 +16,7 @@ public class RegistroAsistencias extends JFrame {
     private final JPanel panelLista;
     private final ArrayList<Estudiante> estudiantes;
     private final ArrayList<JComboBox<String>> combosAsistencia;
+    private JFrame ventanaAnterior;
 
     public RegistroAsistencias() {
         setTitle("Registrar Asistencia");
@@ -49,12 +50,16 @@ public class RegistroAsistencias extends JFrame {
         JButton btnGuardar = new JButton("Guardar Asistencia");
         btnGuardar.addActionListener(e -> guardarAsistencia());
 
-        JButton btnVolver = new JButton("Volver al Menú del Curso");
-        btnVolver.addActionListener(e -> JOptionPane.showMessageDialog(this, "Volviendo al menú del curso..."));
+
 
         JPanel panelBotones = new JPanel();
         panelBotones.add(btnRegistrar);
-        panelBotones.add(btnGuardar);
+        panelBotones.add(btnGuardar);    
+        JButton btnVolver = new JButton("Volver al Menú del Curso");
+        btnVolver.addActionListener(e -> {
+            this.dispose(); // cierra esta ventana
+            ventanaAnterior.setVisible(true); // vuelve a mostrar la anterior
+        });
         panelBotones.add(btnVolver);
 
         add(panelSuperior, BorderLayout.NORTH);
