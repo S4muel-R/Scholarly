@@ -2,48 +2,61 @@ package com.ulacit.app;
 
 import com.ulacit.login.Login;
 import com.ulacit.academico.Plataforma;
+import com.ulacit.asistencia.RegistroAsistencias;
+import com.ulacit.foros.Foro;
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.mensajeria.Chatmensajes;
 
-public class Main {
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            new Login(() -> {
-                mostrarMenu();
-            }).setVisible(true);
+import javax.swing.*;
+import java.awt.*;
+
+public class Main extends JFrame {
+
+    public Main() {
+        setTitle("Menú Principal");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Crear botones
+        JButton btnPlataforma = new JButton("Plataforma Académica");
+        JButton btnGrupos = new JButton("Gestión de Grupos");
+        JButton btnChat = new JButton("Chat Interno");
+        JButton btnAsistencias = new JButton("Registro de Asistencias");
+        JButton btnForos = new JButton("Foros Académicos");
+        JButton btnSalir = new JButton("Salir");
+
+        // Agregar acciones
+        btnPlataforma.addActionListener(e -> Plataforma.main(new String[]{}));
+        btnGrupos.addActionListener(e -> {
+            this.setVisible(false);
+            new ModuloGestiondeGrupos(this).setVisible(true);
         });
+
+        btnChat.addActionListener(e -> Chatmensajes.main(new String[]{}));
+        btnAsistencias.addActionListener(e -> new RegistroAsistencias().setVisible(true));
+        btnForos.addActionListener(e -> new Foro().setVisible(true));
+        btnSalir.addActionListener(e -> System.exit(0));
+
+        // Organizar en un panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(6, 1, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.add(btnPlataforma);
+        panel.add(btnGrupos);
+        panel.add(btnChat);
+        panel.add(btnAsistencias);
+        panel.add(btnForos);
+        panel.add(btnSalir);
+
+        add(panel);
     }
 
-    public static void mostrarMenu() {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
-        int opcion;
-        do {
-            System.out.println("\n--- Menú Principal ---");
-            System.out.println("1. Plataforma Académica");
-            System.out.println("2. Gestión de Grupos");
-            System.out.println("3. Chat Interno");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
-
-            switch (opcion) {
-                case 1:
-                    Plataforma.main(new String[]{});
-                    break;
-                case 2:
-                    ModuloGestiondeGrupos.main(new String[]{});
-                    break;
-                case 3:
-                    Chatmensajes.main(new String[]{});
-                    break;
-                case 0:
-                    System.out.println("Saliendo del sistema.");
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
-            }
-        } while (opcion != 0);
-        scanner.close();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Login(() -> {
+                new Main().setVisible(true); // esta clase con botones
+            }).setVisible(true);
+        });
     }
 }
