@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Grupos {
     private String nombreGrupo;
-    private ArrayList<Estudiante> miembros;
+    private ArrayList<Estudiante> miembros;  //Lista que guarda grupos y sus miembros
 
     public Grupos(String nombreGrupo) {
         this.nombreGrupo = nombreGrupo;
@@ -18,10 +18,10 @@ public class Grupos {
         miembros.add(est);
         est.setGrupo(this);
     }
-
-    public void eliminarEstudiante(Estudiante est) {
+    
+    public void eliminarEstudiante (Estudiante est) {
         miembros.remove(est);
-        est.setGrupo(null);
+        est.setGrupo(this);
     }
 
     public String getNombreGrupo() {
@@ -31,11 +31,5 @@ public class Grupos {
     public ArrayList<Estudiante> getIntegrantes() {
         return miembros;
     }
-
-    @Override
-    public String toString() {
-        return nombreGrupo;
-    }
-
-}
+}   
 
