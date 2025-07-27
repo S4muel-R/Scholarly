@@ -1,17 +1,10 @@
-
-
-package com.ulacit.academico;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Módulo de administración de cursos para Scholarly.
- * Permite crear, editar y visualizar cursos en una interfaz moderna.
- */
+// Archivo standalone, sin declaración de paquete
 public class ModuloAdministracionCursos {
     // Lista de cursos (cada curso es un String con campos separados por '|')
     private final List<String> cursos = new ArrayList<>();
@@ -281,21 +274,29 @@ public class ModuloAdministracionCursos {
 
         // Panel de botones
         JButton botonCrear = new JButton("Crear Curso");
-        botonCrear.addActionListener(e -> mostrarDialogoCrearCurso(frame));
+        botonCrear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoCrearCurso(frame);
+            }
+        });
         JButton botonEditar = new JButton("Editar Curso");
-        botonEditar.addActionListener(e -> mostrarDialogoEditarCurso(frame));
+        botonEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoEditarCurso(frame);
+            }
+        });
         JButton botonVolver = new JButton("Volver");
         // Sin funcionalidad por ahora
 
         JButton botonCerrarSesion = new JButton("Cerrar Sesión");
-        botonCerrarSesion.addActionListener(e -> {
-            frame.dispose();
-            // Volver al login de Main.java
-            javax.swing.SwingUtilities.invokeLater(() -> {
-                new com.ulacit.login.Login(() -> {
-                    com.ulacit.app.Main.mostrarMenu();
-                }).setVisible(true);
-            });
+        botonCerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                // Standalone: solo cerrar la ventana
+            }
         });
 
         JPanel panelBotones = new JPanel();
@@ -428,37 +429,45 @@ public class ModuloAdministracionCursos {
         panelBotonesForm.add(cancelarBtn);
         editarCursoDialog.add(panelBotonesForm, gbc);
 
-        cancelarBtn.addActionListener(ev -> editarCursoDialog.dispose());
-
-        guardarBtn.addActionListener(ev -> {
-            String nuevoHorario = fieldHorario.getText().trim();
-            String nuevaAula = fieldAula.getText().trim();
-            String nuevoProfesor = fieldProfesor.getText().trim();
-            String nuevosEstudiantes = areaEstudiantes.getText().trim();
-
-            if (nuevoHorario.isEmpty() || nuevaAula.isEmpty() || nuevoProfesor.isEmpty() || nuevosEstudiantes.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        editarCursoDialog,
-                        "Por favor, complete todos los campos antes de guardar.",
-                        "Campos incompletos",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
-
-            int confirm = JOptionPane.showConfirmDialog(
-                    editarCursoDialog,
-                    "¿Está seguro que desea guardar los cambios?",
-                    "Confirmar edición",
-                    JOptionPane.YES_NO_OPTION
-            );
-            if (confirm == JOptionPane.YES_OPTION) {
-                String resumen = nombre + " | " + codigo + " | " + periodo + " | " + nuevoHorario + " | " + nuevaAula + " | " + nuevoProfesor + " | " + nuevosEstudiantes;
-                cursos.set(cursoSeleccionado, resumen);
-                refrescarCursos.run();
-                refrescarPanelInfo.run();
-                JOptionPane.showMessageDialog(editarCursoDialog, "Curso editado exitosamente.");
+        cancelarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
                 editarCursoDialog.dispose();
+            }
+        });
+
+        guardarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                String nuevoHorario = fieldHorario.getText().trim();
+                String nuevaAula = fieldAula.getText().trim();
+                String nuevoProfesor = fieldProfesor.getText().trim();
+                String nuevosEstudiantes = areaEstudiantes.getText().trim();
+
+                if (nuevoHorario.isEmpty() || nuevaAula.isEmpty() || nuevoProfesor.isEmpty() || nuevosEstudiantes.isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                            editarCursoDialog,
+                            "Por favor, complete todos los campos antes de guardar.",
+                            "Campos incompletos",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
+                int confirm = JOptionPane.showConfirmDialog(
+                        editarCursoDialog,
+                        "¿Está seguro que desea guardar los cambios?",
+                        "Confirmar edición",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + nuevoHorario + " | " + nuevaAula + " | " + nuevoProfesor + " | " + nuevosEstudiantes;
+                    cursos.set(cursoSeleccionado, resumen);
+                    refrescarCursos.run();
+                    refrescarPanelInfo.run();
+                    JOptionPane.showMessageDialog(editarCursoDialog, "Curso editado exitosamente.");
+                    editarCursoDialog.dispose();
+                }
             }
         });
 
@@ -549,40 +558,48 @@ public class ModuloAdministracionCursos {
         panelBotonesForm.add(cancelarBtn);
         crearCursoDialog.add(panelBotonesForm, gbc);
 
-        cancelarBtn.addActionListener(ev -> crearCursoDialog.dispose());
-
-        guardarBtn.addActionListener(ev -> {
-            String nombre = fieldNombre.getText().trim();
-            String codigo = fieldCodigo.getText().trim();
-            String periodo = fieldPeriodo.getText().trim();
-            String horario = fieldHorario.getText().trim();
-            String aula = fieldAula.getText().trim();
-            String profesor = fieldProfesor.getText().trim();
-            String estudiantes = areaEstudiantes.getText().trim();
-
-            if (nombre.isEmpty() || codigo.isEmpty() || periodo.isEmpty() || horario.isEmpty() || aula.isEmpty() || profesor.isEmpty() || estudiantes.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        crearCursoDialog,
-                        "Por favor, complete todos los campos antes de guardar.",
-                        "Campos incompletos",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
-
-            int confirm = JOptionPane.showConfirmDialog(
-                    crearCursoDialog,
-                    "¿Está seguro que desea guardar este curso?",
-                    "Confirmar guardado",
-                    JOptionPane.YES_NO_OPTION
-            );
-            if (confirm == JOptionPane.YES_OPTION) {
-                String resumen = nombre + " | " + codigo + " | " + periodo + " | " + horario + " | " + aula + " | " + profesor + " | " + estudiantes;
-                cursos.add(resumen);
-                refrescarCursos.run();
-                refrescarPanelInfo.run();
-                JOptionPane.showMessageDialog(crearCursoDialog, "Curso guardado exitosamente.");
+        cancelarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
                 crearCursoDialog.dispose();
+            }
+        });
+
+        guardarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                String nombre = fieldNombre.getText().trim();
+                String codigo = fieldCodigo.getText().trim();
+                String periodo = fieldPeriodo.getText().trim();
+                String horario = fieldHorario.getText().trim();
+                String aula = fieldAula.getText().trim();
+                String profesor = fieldProfesor.getText().trim();
+                String estudiantes = areaEstudiantes.getText().trim();
+
+                if (nombre.isEmpty() || codigo.isEmpty() || periodo.isEmpty() || horario.isEmpty() || aula.isEmpty() || profesor.isEmpty() || estudiantes.isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                            crearCursoDialog,
+                            "Por favor, complete todos los campos antes de guardar.",
+                            "Campos incompletos",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
+                int confirm = JOptionPane.showConfirmDialog(
+                        crearCursoDialog,
+                        "¿Está seguro que desea guardar este curso?",
+                        "Confirmar guardado",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + horario + " | " + aula + " | " + profesor + " | " + estudiantes;
+                    cursos.add(resumen);
+                    refrescarCursos.run();
+                    refrescarPanelInfo.run();
+                    JOptionPane.showMessageDialog(crearCursoDialog, "Curso guardado exitosamente.");
+                    crearCursoDialog.dispose();
+                }
             }
         });
 
