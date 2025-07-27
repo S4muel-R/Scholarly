@@ -6,6 +6,8 @@ import com.ulacit.asistencia.RegistroAsistencias;
 import com.ulacit.foros.Foro;
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.mensajeria.Chatmensajes;
+import com.ulacit.academico.ModuloAdministracionCursos;
+import com.ulacit.dashboard.ModDashboard;
 
 import javax.swing.*;
 import java.awt.*;

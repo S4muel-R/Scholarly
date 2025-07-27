@@ -1,3 +1,5 @@
+package com.ulacit.academico;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
