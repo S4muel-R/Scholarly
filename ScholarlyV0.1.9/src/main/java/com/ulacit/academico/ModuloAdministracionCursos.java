@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Archivo standalone, sin declaración de paquete
-public class ModuloAdministracionCursos {
+public class ModuloAdministracionCursos  {
     // Lista de cursos (cada curso es un String con campos separados por '|')
     private final List<String> cursos = new ArrayList<>();
     private int cursoSeleccionado = -1;

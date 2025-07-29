@@ -7,7 +7,7 @@ import com.ulacit.foros.Foro;
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.mensajeria.Chatmensajes;
 import com.ulacit.academico.ModuloAdministracionCursos;
-import com.ulacit.dashboard.ModDashboard;
+import com.ulacit.dashboard.moddashboardclass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +63,7 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new Login(() -> {
-                new Main().setVisible(true); // esta clase con botones
+                new moddashboardclass().setVisible(true); // esta clase con botones
             }).setVisible(true);
         });
     }

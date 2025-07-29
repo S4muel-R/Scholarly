@@ -4,6 +4,15 @@
  */
 package com.ulacit.dashboard;
 
+import com.ulacit.login.Login;
+import com.ulacit.academico.Plataforma;
+import com.ulacit.asistencia.RegistroAsistencias;
+import com.ulacit.foros.Foro;
+import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
+import com.ulacit.chat.ChatGUI;
+import com.ulacit.academico.ModuloAdministracionCursos;
+import com.ulacit.dashboard.moddashboardclass;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -26,8 +35,23 @@ public class moddashboardclass extends JFrame {
         mainPanel.setBackground(new Color(81, 0, 87));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
+        
+        
+        // Crear botones
+        JButton btnCursos = new JButton("Cursos");
+        JButton btnAnuncios = new JButton("Anuncios");
+        JButton btnChat = new JButton("Chat");
+        JButton btnCalendario = new JButton("Calendario");
+        JButton btnCerrar = new JButton("Cerrar sesion");
 
-        String[] botones = {"Cursos", "Anuncios", "Chat", "Calendario", "Cerrar sesión"};
+        // Agregar acciones
+        //btnForos.addActionListener(e -> new Foro().setVisible(true));
+        btnCursos.addActionListener(e -> new ModuloAdministracionCursos());
+        btnChat.addActionListener(e -> new ChatGUI());
+
+        
+
+        String[] botones = {"Cursos", "Anuncios", "Chat", "Calendario", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -48,13 +72,13 @@ public class moddashboardclass extends JFrame {
     private void manejarClick(String opcion) {
         switch (opcion) {
             case "Cursos":
-                JOptionPane.showMessageDialog(this, "Abriendo el modulo cursos");
+                new ModuloAdministracionCursos().showAdminCursosUI();
                 break;
             case "Anuncios":
                 JOptionPane.showMessageDialog(this, "Abriendo el modulo nuncios");
                 break;
             case "Chat":
-                JOptionPane.showMessageDialog(this, "Abriendo el modulo Chat");
+                new ChatGUI();
                 break;
             case "Calendario":
                 JOptionPane.showMessageDialog(this, "Abriendo el modulo Calendario");
