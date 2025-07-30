@@ -25,6 +25,7 @@ com\ulacit\academico\ModuloAdministracionCursos$3.class
 com\ulacit\chat\NewJFrame$4.class
 com\ulacit\calendario\calendario$3.class
 com\ulacit\dashboard\paneldashboard$1.class
+com\ulacit\login\LoginApp.class
 com\ulacit\dashboard\paneldashboard.class
 com\ulacit\chat\Pag1$3.class
 com\ulacit\chat\Pag3.class
@@ -38,10 +39,12 @@ com\ulacit\chat\NewJFrame$3.class
 com\ulacit\dashboard\ModDashboard.class
 com\ulacit\chat\Pag3$1.class
 com\ulacit\chat\Pag1$1.class
+com\ulacit\login\LoginApp$LoginForm.class
 com\ulacit\dashboard\paneldashboard$5.class
 com\ulacit\chat\Pag1$4.class
 com\ulacit\chat\Pag4$2.class
 com\ulacit\chat\Pag4.class
+com\ulacit\login\LoginApp$Usuario.class
 com\ulacit\academico\ModuloAdministracionCursos$8.class
 com\ulacit\chat\NewJFrame$6.class
 com\ulacit\chat\Pag2$2.class

@@ -1,6 +1,6 @@
 package com.ulacit.app;
 
-import com.ulacit.login.Login;
+import com.ulacit.login.LoginApp;
 import com.ulacit.academico.Plataforma;
 import com.ulacit.asistencia.RegistroAsistencias;
 import com.ulacit.foros.Foro;
@@ -62,9 +62,8 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new Login(() -> {
-                new moddashboardclass().setVisible(true); // esta clase con botones
-            }).setVisible(true);
+            new LoginApp().setVisible(true);
         });
     }
+
 }
