@@ -2,27 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ulacit.dashboard;
+package com.ulacit.menucurso;
 
-
-import com.ulacit.chat.ChatGUI;
-import com.ulacit.academico.ModuloAdministracionCursos;
-import com.ulacit.calendario.calendario;
-import com.ulacit.login.LoginApp;
-
+/**
+ *
+ * @author penge
+ */
+import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
+import com.ulacit.foros.Foro;
+import com.ulacit.asistencia.
 
 import java.awt.*;
 import javax.swing.*;
-/**
- *
- * @author sebas
- */
 
-public class moddashboardclass extends JFrame {
+public class menucurso extends JFrame {
     
-    private static moddashboardclass instance;
+    private static menucurso instance;
 
-    public moddashboardclass() {
+    public menucurso() {
         setTitle("MENU DASHBOARD");
         setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,16 +34,16 @@ public class moddashboardclass extends JFrame {
         
         
         // Crear botones
-        JButton btnCursos = new JButton("Cursos");
-        JButton btnAnuncios = new JButton("Anuncios");
-        JButton btnChat = new JButton("Chat");
-        JButton btnCalendario = new JButton("Calendario");
-        JButton btnCerrar = new JButton("Cerrar sesion");
+        JButton btnGrupos = new JButton("Cursos");
+        JButton btnForos = new JButton("Anuncios");
+        JButton btnAsistencia = new JButton("Chat");
+        JButton btnVolver = new JButton("Volver");
 
         // Agregar acciones
         //btnForos.addActionListener(e -> new Foro().setVisible(true));
-        btnCursos.addActionListener(e -> new ModuloAdministracionCursos());
-        btnChat.addActionListener(e -> new ChatGUI());
+        btnGrupos.addActionListener(e -> new ModuloGestiondeGrupos());
+        btnForos.addActionListener(e -> new Foro());
+        btnAsistencia.addActionListener(e -> new );
 
         
 
@@ -68,9 +65,9 @@ public class moddashboardclass extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
     }
     
-        public static moddashboardclass getInstance() {
+        public static menucurso getInstance() {
         if (instance == null || !instance.isDisplayable()) {
-            instance = new moddashboardclass();
+            instance = new menucurso();
         }
         return instance;
     }
@@ -92,13 +89,11 @@ public class moddashboardclass extends JFrame {
                 new calendario().showCalendarioUI();
                 dispose();
                 break;
-            case "Cerrar sesión":
+            case "Volver":
             for (Window window : Window.getWindows()) {
                 window.dispose();
             }
             new LoginApp().setVisible(true); // Abre una nueva instancia del login
         }
     }}
-
-  
 

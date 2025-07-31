@@ -1,5 +1,7 @@
 package com.ulacit.academico;
 
+import com.ulacit.dashboard.moddashboardclass;
+import com.ulacit.login.LoginApp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -290,14 +292,23 @@ public class ModuloAdministracionCursos  {
             }
         });
         JButton botonVolver = new JButton("Volver");
-        // Sin funcionalidad por ahora
+        
+        botonVolver.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            frame.dispose(); // Cierra la ventana actual
+            moddashboardclass.getInstance().setVisible(true);
+            }
+        });
 
         JButton botonCerrarSesion = new JButton("Cerrar Sesión");
         botonCerrarSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                // Standalone: solo cerrar la ventana
+                for (Window window : Window.getWindows()) {
+                window.dispose();
+            }
+            new LoginApp().setVisible(true); // Abre una nueva instancia del login
             }
         });
 
