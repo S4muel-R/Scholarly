@@ -15,6 +15,7 @@ public class Foro extends JFrame {
     private DefaultListModel<String> modeloForos = new DefaultListModel<>();
     private JList<String> listaForos = new JList<>(modeloForos);
     private ArrayList<String> descripciones = new ArrayList<>();
+    private JFrame ventanaAnterior;
 
     // Almacena respuestas y subrespuestas
     private Map<String, List<Comentario>> comentariosPorForo = new HashMap<>();
@@ -41,7 +42,11 @@ public class Foro extends JFrame {
 
         btnCrear.addActionListener(e -> crearForo());
         btnEliminar.addActionListener(e -> eliminarForo());
-        btnVolver.addActionListener(e -> JOptionPane.showMessageDialog(this, "Volviendo..."));
+        btnVolver.addActionListener(e -> {
+            this.dispose(); // cierra esta ventana
+            ventanaAnterior.setVisible(true); // vuelve a mostrar la anterior
+        });
+        panelBotones.add(btnVolver);
 
         listaForos.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
