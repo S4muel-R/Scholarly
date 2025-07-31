@@ -10,10 +10,13 @@ package com.ulacit.menucurso;
  */
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.foros.Foro;
+
 import com.ulacit.asistenciav2.AsistenciaManager;
 import com.ulacit.asistenciav2.Profesor;
 import com.ulacit.asistenciav2.Estudiante;
 import com.ulacit.asistenciav2.Curso;
+
+import com.ulacit.calificaciones.VentanaPrincipal;
 
 import java.awt.*;
 import javax.swing.*;
@@ -93,7 +96,7 @@ public class menucurso extends JFrame {
                 break;
 
             case "Calificaciones":
-                JOptionPane.showMessageDialog(this, "Módulo de calificaciones próximamente.");
+                new VentanaPrincipal().setVisible(true);
                 break;
 
             case "Volver":
