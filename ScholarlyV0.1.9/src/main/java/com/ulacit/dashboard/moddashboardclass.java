@@ -4,17 +4,14 @@
  */
 package com.ulacit.dashboard;
 
-import com.ulacit.login.Login;
-import com.ulacit.academico.Plataforma;
-import com.ulacit.asistencia.RegistroAsistencias;
-import com.ulacit.foros.Foro;
-import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
+
 import com.ulacit.chat.ChatGUI;
 import com.ulacit.academico.ModuloAdministracionCursos;
-import com.ulacit.dashboard.moddashboardclass;
+import com.ulacit.calendario.calendario;
+import com.ulacit.login.LoginApp;
+
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 /**
  *
@@ -22,6 +19,8 @@ import javax.swing.*;
  */
 
 public class moddashboardclass extends JFrame {
+    
+    private static moddashboardclass instance;
 
     public moddashboardclass() {
         setTitle("MENU DASHBOARD");
@@ -68,25 +67,38 @@ public class moddashboardclass extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
     }
+    
+        public static moddashboardclass getInstance() {
+        if (instance == null || !instance.isDisplayable()) {
+            instance = new moddashboardclass();
+        }
+        return instance;
+    }
 
     private void manejarClick(String opcion) {
         switch (opcion) {
             case "Cursos":
                 new ModuloAdministracionCursos().showAdminCursosUI();
+                dispose();
                 break;
             case "Anuncios":
                 JOptionPane.showMessageDialog(this, "Abriendo el modulo nuncios");
                 break;
             case "Chat":
                 new ChatGUI();
+                dispose();
                 break;
             case "Calendario":
-                JOptionPane.showMessageDialog(this, "Abriendo el modulo Calendario");
+                new calendario().showCalendarioUI();
+                dispose();
                 break;
-            case "Cerrar sesión":
-                JOptionPane.showMessageDialog(this, "Sesion terminada");
-                dispose(); // Cierra esta ventana
+            case "Cerrar sesion":
+                SwingUtilities.invokeLater(() -> {
+                    new LoginApp().setVisible(true); // Mostrar la ventana de login
+                });
+                this.dispose(); // Cierra solo el dashboard actual
                 break;
+
         }
     }}
 

@@ -42,7 +42,7 @@ public class Foro extends JFrame {
 
         btnCrear.addActionListener(e -> crearForo());
         btnEliminar.addActionListener(e -> eliminarForo());
-         btnVolver.addActionListener(e -> {
+        btnVolver.addActionListener(e -> {
             this.dispose(); // cierra esta ventana
             ventanaAnterior.setVisible(true); // vuelve a mostrar la anterior
         });
