@@ -92,11 +92,13 @@ public class moddashboardclass extends JFrame {
                 new calendario().showCalendarioUI();
                 dispose();
                 break;
-            case "Cerrar sesión":
-            for (Window window : Window.getWindows()) {
-                window.dispose();
-            }
-            new LoginApp().setVisible(true); // Abre una nueva instancia del login
+            case "Cerrar sesion":
+                SwingUtilities.invokeLater(() -> {
+                    new LoginApp().setVisible(true); // Mostrar la ventana de login
+                });
+                this.dispose(); // Cierra solo el dashboard actual
+                break;
+
         }
     }}
 

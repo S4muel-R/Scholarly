@@ -2,6 +2,8 @@ package com.ulacit.academico;
 
 import com.ulacit.dashboard.moddashboardclass;
 import com.ulacit.login.LoginApp;
+import com.ulacit.menucurso.menucurso;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -199,14 +201,45 @@ public class ModuloAdministracionCursos  {
                 gbc.gridx = 1;
                 tarjetaPanel.add(alumnosPanel, gbc);
 
-                // Scroll para la tarjeta
-                JScrollPane scrollInfo = new JScrollPane(tarjetaPanel);
+
+                
+                // Botón para acceder al menú del curso
+                JButton btnAccederCurso = new JButton("Acceder al Curso");
+                btnAccederCurso.setFont(new Font("Arial", Font.BOLD, 16));
+                btnAccederCurso.setBackground(new Color(25, 118, 210));
+                btnAccederCurso.setForeground(Color.WHITE);
+                btnAccederCurso.setFocusPainted(false);
+
+                // Acción al hacer clic
+                btnAccederCurso.addActionListener(e -> {
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(btnAccederCurso);
+                menucurso menu = new menucurso(ventanaActual);
+                menu.setVisible(true);
+                ventanaActual.setVisible(false); // Oculta ventana actual
+                });
+
+                // Panel para el botón
+                JPanel panelBotonAcceso = new JPanel();
+                panelBotonAcceso.setBackground(Color.WHITE);
+                panelBotonAcceso.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+                panelBotonAcceso.add(btnAccederCurso);
+
+                // Panel contenedor para tarjeta + botón
+                JPanel contenedorFinal = new JPanel(new BorderLayout());
+                contenedorFinal.setBackground(Color.WHITE);
+                contenedorFinal.add(tarjetaPanel, BorderLayout.CENTER);
+                contenedorFinal.add(panelBotonAcceso, BorderLayout.SOUTH);
+
+                // Scroll final con todo incluido
+                JScrollPane scrollInfo = new JScrollPane(contenedorFinal);
                 scrollInfo.setBorder(null);
                 scrollInfo.setBackground(Color.WHITE);
                 scrollInfo.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 scrollInfo.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
                 scrollInfo.getViewport().setBackground(Color.WHITE);
+
                 panelInfo.add(scrollInfo, BorderLayout.CENTER);
+
             } else {
                 panelInfo.setBackground(new Color(41, 99, 156));
                 JLabel label = new JLabel("Seleccione un curso", SwingConstants.CENTER);

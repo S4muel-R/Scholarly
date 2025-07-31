@@ -10,44 +10,35 @@ package com.ulacit.menucurso;
  */
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.foros.Foro;
-import com.ulacit.asistencia.
+import com.ulacit.asistenciav2.AsistenciaManager;
+import com.ulacit.asistenciav2.Profesor;
+import com.ulacit.asistenciav2.Estudiante;
+import com.ulacit.asistenciav2.Curso;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.List;
 
 public class menucurso extends JFrame {
-    
+
+    private JFrame ventanaAnterior;
     private static menucurso instance;
 
-    public menucurso() {
-        setTitle("MENU DASHBOARD");
+    public menucurso(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
+
+        setTitle("MENÚ DEL CURSO");
         setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel principal con color
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(new Color(81, 0, 87));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
-        
-        
-        // Crear botones
-        JButton btnGrupos = new JButton("Cursos");
-        JButton btnForos = new JButton("Anuncios");
-        JButton btnAsistencia = new JButton("Chat");
-        JButton btnVolver = new JButton("Volver");
 
-        // Agregar acciones
-        //btnForos.addActionListener(e -> new Foro().setVisible(true));
-        btnGrupos.addActionListener(e -> new ModuloGestiondeGrupos());
-        btnForos.addActionListener(e -> new Foro());
-        btnAsistencia.addActionListener(e -> new );
-
-        
-
-        String[] botones = {"Cursos", "Anuncios", "Chat", "Calendario", "Cerrar sesion"};
+        String[] botones = {"Grupos", "Foros", "Asistencia", "Calificaciones", "Volver"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -56,44 +47,59 @@ public class menucurso extends JFrame {
             boton.setBackground(Color.WHITE);
             boton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
-            // Acción al hacer clic
             boton.addActionListener(e -> manejarClick(texto));
-            mainPanel.add(Box.createVerticalStrut(20));  // Espaciado
+            mainPanel.add(Box.createVerticalStrut(20));
             mainPanel.add(boton);
         }
 
         add(mainPanel, BorderLayout.CENTER);
     }
-    
-        public static menucurso getInstance() {
+
+    public static menucurso getInstance(JFrame ventanaAnterior) {
         if (instance == null || !instance.isDisplayable()) {
-            instance = new menucurso();
+            instance = new menucurso(ventanaAnterior);
         }
         return instance;
     }
 
+
     private void manejarClick(String opcion) {
         switch (opcion) {
-            case "Cursos":
-                new ModuloAdministracionCursos().showAdminCursosUI();
-                dispose();
+            case "Grupos":
+                new ModuloGestiondeGrupos().setVisible(true);
                 break;
-            case "Anuncios":
-                JOptionPane.showMessageDialog(this, "Abriendo el modulo nuncios");
-                break;
-            case "Chat":
-                new ChatGUI();
-                dispose();
-                break;
-            case "Calendario":
-                new calendario().showCalendarioUI();
-                dispose();
-                break;
-            case "Volver":
-            for (Window window : Window.getWindows()) {
-                window.dispose();
-            }
-            new LoginApp().setVisible(true); // Abre una nueva instancia del login
-        }
-    }}
 
+            case "Foros":
+                new Foro().setVisible(true);
+                break;
+
+            case "Asistencia":
+                Profesor prof = new Profesor("Profe Juan");
+
+                Estudiante adrian = new Estudiante("Adrian", "001");
+                Estudiante maria = new Estudiante("Maria", "002");
+                Curso cursoA = new Curso("Matemática");
+                cursoA.agregarEstudiante(adrian);
+                cursoA.agregarEstudiante(maria);
+
+                Estudiante laura = new Estudiante("Laura", "003");
+                Curso cursoB = new Curso("Historia");
+                cursoB.agregarEstudiante(laura);
+
+                List<Curso> cursos = List.of(cursoA, cursoB);
+                List<String> semanas = List.of("Semana 1", "Semana 2", "Semana 3");
+
+                AsistenciaManager.mostrarAsistenciaProfesor(prof, cursos, semanas);
+                break;
+
+            case "Calificaciones":
+                JOptionPane.showMessageDialog(this, "Módulo de calificaciones próximamente.");
+                break;
+
+            case "Volver":
+                this.dispose();
+                if (ventanaAnterior != null) ventanaAnterior.setVisible(true);
+                break;
+        }
+    }
+}
