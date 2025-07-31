@@ -1,12 +1,17 @@
 
 package com.ulacit.calendario;
 
+import com.ulacit.dashboard.moddashboardclass;
+import com.ulacit.login.LoginApp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
 public class calendario {
+
+    
     static class Evento {
         int dia, mes, anio;
         String nombre, hora, descripcion;
@@ -136,16 +141,11 @@ public class calendario {
 
         // --- Acción Volver: cerrar ventana y abrir menú principal ---
         btnVolver.addActionListener(e -> {
-            frame.dispose();
-            try {
-                // Instanciar y mostrar el menú principal directamente
-                Class<?> mainClass = Class.forName("com.ulacit.app.Main");
-                JFrame mainMenu = (JFrame) mainClass.getDeclaredConstructor().newInstance();
-                mainMenu.setVisible(true);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "No se pudo abrir el menú principal.");
-            }
+            frame.dispose(); // Cierra la ventana actual
+            moddashboardclass.getInstance().setVisible(true);
         });
+
+
 
         // --- Mostrar eventos del día ---
         Runnable mostrarInfoEvento = () -> {
@@ -244,16 +244,12 @@ public class calendario {
 
         // --- Cerrar sesión ---
         btnSalir.addActionListener(e -> {
-            frame.dispose();
-            try {
-                Class<?> loginClass = Class.forName("com.ulacit.login.Login");
-                java.lang.reflect.Constructor<?> ctor = loginClass.getConstructor(Runnable.class);
-                JFrame login = (JFrame) ctor.newInstance((Runnable) null);
-                login.setVisible(true);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "No se pudo abrir la pantalla de inicio de sesión.");
-            }
+            for (Window window : Window.getWindows()) {
+                window.dispose();
+               }
+            new LoginApp().setVisible(true); // Abre una nueva instancia del login
         });
+
 
         // --- Actualizar calendario ---
         final Runnable[] actualizarCalendario = new Runnable[1];
