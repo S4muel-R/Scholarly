@@ -10,6 +10,7 @@ package com.ulacit.menucurso;
  */
 import com.ulacit.gestiondegrupos.ModuloGestiondeGrupos;
 import com.ulacit.foros.Foro;
+import com.ulacit.tareas.Asignacion_Tareas;
 
 import com.ulacit.asistenciav2.AsistenciaManager;
 import com.ulacit.asistenciav2.Profesor;
@@ -41,7 +42,7 @@ public class menucurso extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Grupos", "Foros", "Asistencia", "Calificaciones", "Volver"};
+        String[] botones = {"Tareas","Grupos", "Foros", "Asistencia", "Calificaciones", "Volver"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -68,6 +69,11 @@ public class menucurso extends JFrame {
 
     private void manejarClick(String opcion) {
         switch (opcion) {
+            
+            case "Tareas":
+                new Asignacion_Tareas().setVisible(true);
+                break;
+                
             case "Grupos":
                 new ModuloGestiondeGrupos().setVisible(true);
                 break;

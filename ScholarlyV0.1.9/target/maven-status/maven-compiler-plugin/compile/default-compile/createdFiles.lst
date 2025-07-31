@@ -51,6 +51,7 @@ com\ulacit\dashboard\paneldashboard$1.class
 com\ulacit\login\LoginApp.class
 com\ulacit\calificaciones\ItemEvaluativo.class
 com\ulacit\chat\Pag3.class
+com\ulacit\tareas\Asignacion_Tareas.class
 com\ulacit\academico\ModuloAdministracionCursos$7.class
 com\ulacit\chat\Pag4$1.class
 com\ulacit\calendario\calendario$2.class

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.asignacion_tareas;
+package com.ulacit.tareas;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -20,6 +20,8 @@ public class Asignacion_Tareas extends JFrame {
     private JTextField txtPuntaje;
     private JButton btnGuardar;
     private JButton btnVerTareas;
+    private JButton btnVolver;
+    private JFrame ventanaAnterior;
 
     public Asignacion_Tareas() {
         setTitle("Compartir Archivos y Actividades - Scholarly");
@@ -95,6 +97,18 @@ public class Asignacion_Tareas extends JFrame {
         btnVerTareas.setPreferredSize(new Dimension(200, 40));
         btnVerTareas.addActionListener(e -> verTareasGuardadas());
         panelBoton.add(btnVerTareas);
+        
+        btnVolver = new JButton("Volver");
+        btnVolver.setBackground(new Color(100, 149, 237));
+        btnVolver.setForeground(Color.WHITE);
+        btnVolver.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnVolver.setFocusPainted(false);
+        btnVolver.setPreferredSize(new Dimension(200, 40));
+        btnVolver.addActionListener(e -> {
+            this.dispose(); // cierra esta ventana
+            ventanaAnterior.setVisible(true); // vuelve a mostrar la anterior
+        });
+        panelBoton.add(btnVolver);
 
         panelPrincipal.add(panelBoton, BorderLayout.SOUTH);
     }
