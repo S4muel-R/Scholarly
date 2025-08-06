@@ -14,6 +14,8 @@ import com.ulacit.dashboard.moddashboardclass;
  * @author Anderson M
  */
 public class LoginApp extends JFrame {
+    // Usuario autenticado global
+    public static Usuario usuarioActual = null;
 
     public LoginApp() {
         setTitle("SCHOLARLY");
@@ -128,10 +130,10 @@ public class LoginApp extends JFrame {
                     Usuario u = usuarios.get(correo);
                     if (u.clave.equals(clave)) {
                         if (tipoUsuario == null || tipoUsuario.equalsIgnoreCase(u.tipo)) {
+                            LoginApp.usuarioActual = u; // Guardar usuario global
                             JOptionPane.showMessageDialog(this, "Bienvenido " + u.tipo + ": " + u.correo);
                             dispose();
                             new moddashboardclass().setVisible(true);
-                            
                         } else {
                             lblMsj.setText("Este usuario no pertenece a este módulo.");
                             lblMsj.setForeground(Color.RED);
@@ -148,8 +150,8 @@ public class LoginApp extends JFrame {
         }
     }
 
-    static class Usuario {
-        String correo, clave, tipo;
+    public static class Usuario {
+        public String correo, clave, tipo;
         Usuario(String correo, String clave, String tipo) {
             this.correo = correo; this.clave = clave; this.tipo = tipo;
         }
