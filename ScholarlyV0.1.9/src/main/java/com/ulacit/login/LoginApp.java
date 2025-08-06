@@ -157,7 +157,7 @@ public class LoginApp extends JFrame {
         }
     }
 
-    static HashMap<String, Usuario> usuarios = new HashMap<>();
+    public static HashMap<String, Usuario> usuarios = new HashMap<>();
     static {
         usuarios.put("estudiante@ulacit.ed.cr", new Usuario("estudiante@ulacit.ed.cr", "1234", "Estudiante"));
         usuarios.put("profesor@ulacit.ed.cr", new Usuario("profesor@ulacit.ed.cr", "1234", "Profesor"));
