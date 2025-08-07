@@ -10,6 +10,7 @@ import com.ulacit.academico.ModuloAdministracionCursos;
 import com.ulacit.calendario.calendario;
 import com.ulacit.login.LoginApp;
 import com.ulacit.Notificaciones.PanelAnuncios;
+import com.ulacit.Soporte.SoporteTecnico;
 
 
 import java.awt.*;
@@ -42,7 +43,7 @@ public class dashboardestudiante extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Cursos", "Chat", "Calendario", "Cerrar sesion"};
+        String[] botones = {"Cursos", "Chat", "Calendario", "Soporte Tecnico", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -82,6 +83,11 @@ public class dashboardestudiante extends JFrame {
                 new calendario().showCalendarioUI();
                 dispose();
                 break;
+                
+            case "Soporte Tecnico":
+                new SoporteTecnico();
+                break;
+                
             case "Cerrar sesion":
                 SwingUtilities.invokeLater(() -> {
                     new LoginApp().setVisible(true); // Mostrar la ventana de login

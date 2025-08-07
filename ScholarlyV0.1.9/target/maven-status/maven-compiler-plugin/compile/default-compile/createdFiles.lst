@@ -21,6 +21,7 @@ com\ulacit\academico\ModuloAdministracionCursos.class
 com\ulacit\academico\ModuloAdministracionCursos$4.class
 com\ulacit\calificaciones\HistorialCambio.class
 com\ulacit\chat\NewJFrame$3.class
+com\ulacit\Soporte\SoporteTecnico.class
 com\ulacit\chat\Pag3$1.class
 com\ulacit\asistenciav2\AsistenciaManager.class
 com\ulacit\calificaciones\Calificacion.class
@@ -63,6 +64,7 @@ com\ulacit\calificaciones\ItemEvaluativo.class
 com\ulacit\roles\ventanaadmin.class
 com\ulacit\dashboard\dashboardestudiante.class
 com\ulacit\roles\usuario.class
+com\ulacit\Soporte\soportecnico2admin.class
 com\ulacit\chat\Pag3.class
 com\ulacit\tareas\Asignacion_Tareas.class
 com\ulacit\academico\ModuloAdministracionCursos$7.class
