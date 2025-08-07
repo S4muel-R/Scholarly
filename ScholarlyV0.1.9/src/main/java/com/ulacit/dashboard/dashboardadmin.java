@@ -71,6 +71,8 @@ public class dashboardadmin extends JFrame {
                 
                 break;
                 
+           
+                
             case "Cerrar sesion":
                 SwingUtilities.invokeLater(() -> {
                 new LoginApp().setVisible(true); // Mostrar la ventana de login
