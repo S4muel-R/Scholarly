@@ -10,6 +10,9 @@ import java.util.HashMap;
 
 import com.ulacit.dashboard.moddashboardclass;
 import com.ulacit.login.Recuperar_Contrasena;
+import com.ulacit.dashboard.dashboardestudiante;
+import com.ulacit.dashboard.dashboardadmin;
+
 /**
  *
  * @author Anderson M
@@ -134,26 +137,30 @@ public class LoginApp extends JFrame {
                 String correo = txtCorreo.getText().trim();
                 String clave = new String(txtClave.getPassword());
 
-                if (usuarios.containsKey(correo)) {
-                    Usuario u = usuarios.get(correo);
-                    if (u.clave.equals(clave)) {
-                        if (tipoUsuario == null || tipoUsuario.equalsIgnoreCase(u.tipo)) {
-                            LoginApp.usuarioActual = u; // Guardar usuario global
-                            JOptionPane.showMessageDialog(this, "Bienvenido " + u.tipo + ": " + u.correo);
-                            dispose();
-                            new moddashboardclass().setVisible(true);
-                        } else {
-                            lblMsj.setText("Este usuario no pertenece a este módulo.");
-                            lblMsj.setForeground(Color.RED);
-                        }
+            if (LoginApp.usuarios.containsKey(correo)) {
+                Usuario u = LoginApp.usuarios.get(correo);
+                if (u.clave.equals(clave)) {
+                    usuarioActual = u; // Guarda el usuario actual
+                    dispose(); // Cierra ventana de login
+
+                    // Redirección según el correo
+                    if (correo.equalsIgnoreCase("admin@ulacit.ed.cr")) {
+                        new dashboardadmin().setVisible(true);
+                    } else if (correo.equalsIgnoreCase("profesor@ulacit.ed.cr")) {
+                        new moddashboardclass().setVisible(true);
+                    } else if (correo.equalsIgnoreCase("estudiante@ulacit.ed.cr")) {
+                        new dashboardestudiante().setVisible(true);
                     } else {
-                        lblMsj.setText("Contraseña incorrecta.");
-                        lblMsj.setForeground(Color.RED);
+                        JOptionPane.showMessageDialog(null, "Correo no tiene asignado un menú.");
+                        new LoginApp().setVisible(true); // Regresa al login
                     }
+
                 } else {
-                    lblMsj.setText("Usuario no encontrado.");
-                    lblMsj.setForeground(Color.RED);
+                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta.");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado.");
+            }
             });
         }
     }
