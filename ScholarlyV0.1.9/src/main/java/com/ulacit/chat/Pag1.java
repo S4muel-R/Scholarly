@@ -4,6 +4,7 @@
  */
 package com.ulacit.chat;
 
+import com.ulacit.chat.Mensaje_Fijado;
 /**
  *
  * @author sebas
@@ -28,6 +29,7 @@ public class Pag1 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -45,6 +47,9 @@ public class Pag1 extends javax.swing.JPanel {
         txtContenido = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        Mensaje_Fijado = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -144,6 +149,13 @@ public class Pag1 extends javax.swing.JPanel {
 
         jLabel7.setText("Mensaje");
 
+        Mensaje_Fijado.setText("Anclar");
+        Mensaje_Fijado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mensaje_FijadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +165,7 @@ public class Pag1 extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 40, Short.MAX_VALUE)
+                        .addGap(0, 41, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
@@ -179,9 +191,11 @@ public class Pag1 extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addComponent(btnEnviar)))
-                        .addContainerGap())))
+                                .addGap(137, 137, 137)
+                                .addComponent(btnEnviar)
+                                .addGap(33, 33, 33)
+                                .addComponent(Mensaje_Fijado)))
+                        .addContainerGap(119, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +225,9 @@ public class Pag1 extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(txtNombreReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEnviar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEnviar)
+                    .addComponent(Mensaje_Fijado))
                 .addGap(24, 24, 24))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -224,7 +240,7 @@ public class Pag1 extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 6, Short.MAX_VALUE)))
+                    .addGap(0, 5, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,9 +289,20 @@ javax.swing.JOptionPane.showMessageDialog(this, " Mensaje enviado con éxito.", 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreRemitenteActionPerformed
 
+    private void Mensaje_FijadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mensaje_FijadoActionPerformed
+        // TODO add your handling code here:
+        Mensaje_Fijado.addActionListener(e -> {
+
+            new Mensaje_Fijado().setVisible(true);
+        });
+        
+    }//GEN-LAST:event_Mensaje_FijadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Mensaje_Fijado;
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

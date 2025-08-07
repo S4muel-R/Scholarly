@@ -28,8 +28,16 @@ public class menucurso extends JFrame {
     private JFrame ventanaAnterior;
     private static menucurso instance;
 
-    public menucurso(JFrame ventanaAnterior) {
+    private String nombreCurso;
+    private String codigoCurso;
+    private java.util.List<String> idsEstudiantes;
+
+    // Nuevo constructor que recibe datos del curso
+    public menucurso(JFrame ventanaAnterior, String nombreCurso, String codigoCurso, java.util.List<String> idsEstudiantes) {
         this.ventanaAnterior = ventanaAnterior;
+        this.nombreCurso = nombreCurso;
+        this.codigoCurso = codigoCurso;
+        this.idsEstudiantes = idsEstudiantes;
 
         setTitle("MENÚ DEL CURSO");
         setSize(600, 500);
@@ -38,11 +46,11 @@ public class menucurso extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(81, 0, 87));
+        mainPanel.setBackground(com.ulacit.tema.Tema.getColorFondo());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Tareas","Grupos", "Foros", "Asistencia", "Calificaciones", "Volver"};
+        String[] botones = {"Tareas","Grupos", "Foros", "Asistencia", "Calificaciones", "Reporte de Desempeño", "Volver"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -59,52 +67,47 @@ public class menucurso extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
     }
 
-    public static menucurso getInstance(JFrame ventanaAnterior) {
+    // Nuevo método para crear instancia pasando datos del curso
+    public static menucurso getInstance(JFrame ventanaAnterior, String nombreCurso, String codigoCurso, java.util.List<String> idsEstudiantes) {
         if (instance == null || !instance.isDisplayable()) {
-            instance = new menucurso(ventanaAnterior);
+            instance = new menucurso(ventanaAnterior, nombreCurso, codigoCurso, idsEstudiantes);
         }
         return instance;
     }
 
-
     private void manejarClick(String opcion) {
         switch (opcion) {
-            
             case "Tareas":
                 new Asignacion_Tareas().setVisible(true);
                 break;
-                
             case "Grupos":
                 new ModuloGestiondeGrupos().setVisible(true);
                 break;
-
             case "Foros":
                 new Foro().setVisible(true);
                 break;
-
-            case "Asistencia":
+            case "Asistencia": {
                 Profesor prof = new Profesor("Profe Juan");
-
                 Estudiante adrian = new Estudiante("Adrian", "001");
                 Estudiante maria = new Estudiante("Maria", "002");
                 Curso cursoA = new Curso("Matemática");
                 cursoA.agregarEstudiante(adrian);
                 cursoA.agregarEstudiante(maria);
-
                 Estudiante laura = new Estudiante("Laura", "003");
                 Curso cursoB = new Curso("Historia");
                 cursoB.agregarEstudiante(laura);
-
                 List<Curso> cursos = List.of(cursoA, cursoB);
                 List<String> semanas = List.of("Semana 1", "Semana 2", "Semana 3");
-
                 AsistenciaManager.mostrarAsistenciaProfesor(prof, cursos, semanas);
                 break;
-
+            }
             case "Calificaciones":
                 new VentanaPrincipal().setVisible(true);
                 break;
-
+            case "Reporte de Desempeño":
+                // Ahora pasamos la lista real de estudiantes y el nombre/código del curso
+                new com.ulacit.reporteDesempeno.reporteDesempeno(nombreCurso, idsEstudiantes).setVisible(true);
+                break;
             case "Volver":
                 this.dispose();
                 if (ventanaAnterior != null) ventanaAnterior.setVisible(true);
