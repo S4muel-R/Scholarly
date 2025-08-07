@@ -46,7 +46,7 @@ public class menucurso extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(81, 0, 87));
+        mainPanel.setBackground(com.ulacit.tema.Tema.getColorFondo());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
