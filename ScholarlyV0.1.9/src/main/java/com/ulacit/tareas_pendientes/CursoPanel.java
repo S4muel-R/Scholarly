@@ -1,4 +1,4 @@
-package moodulo.tareas_pendientes;
+package com.ulacit.tareas_pendientes;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;

@@ -1,4 +1,4 @@
-package modulo.confirmacion_entrega;
+package com.ulacit.confirmacion_entrega;
 import java.time.LocalDateTime;
 
 public class Actividad {

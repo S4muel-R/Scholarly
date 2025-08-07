@@ -10,6 +10,7 @@ import com.ulacit.chat.ChatGUI;
 import com.ulacit.login.LoginApp;
 import com.ulacit.roles.ventanaadmin;
 import com.ulacit.tema.Tema;
+import com.ulacit.Soporte.soportecnico2admin;
 
 
 import java.awt.*;
@@ -97,7 +98,7 @@ public class dashboardadmin extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Asignar Roles", "Cerrar sesion"};
+        String[] botones = {"Asignar Roles","Soporte Tecnico", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -137,12 +138,16 @@ public class dashboardadmin extends JFrame {
                 
                 break;
                 
+            case "Soporte Tecnico":
+                soportecnico2admin.main(null);
+                break;
            
                 
             case "Cerrar sesion":
                 SwingUtilities.invokeLater(() -> {
-                new LoginApp().setVisible(true); // Mostrar la ventana de login
+                    new LoginApp().setVisible(true); // Mostrar la ventana de login
                 });
-
+                this.dispose(); // Cierra solo el dashboard actual
+                break;
         }
     }}

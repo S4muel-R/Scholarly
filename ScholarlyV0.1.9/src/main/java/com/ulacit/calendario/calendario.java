@@ -142,7 +142,7 @@ public class calendario {
         // --- Acción Volver: cerrar ventana y abrir menú principal ---
         btnVolver.addActionListener(e -> {
             frame.dispose(); // Cierra la ventana actual
-            moddashboardclass.getInstance().setVisible(true);
+            
         });
 
 

@@ -1,4 +1,5 @@
-package moodulo.tareas_pendientes;
+package com.ulacit.tareas_pendientes;
+
 import java.time.LocalDate;
 import javax.swing.SwingUtilities;
 public class MooduloTareas_Pendientes{

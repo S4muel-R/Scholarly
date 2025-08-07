@@ -368,7 +368,7 @@ public class ModuloAdministracionCursos  {
             @Override
             public void actionPerformed(ActionEvent e) {
             frame.dispose(); // Cierra la ventana actual
-            moddashboardclass.getInstance().setVisible(true);
+            
             }
         });
 
