@@ -1,0 +1,128 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package moduloestudiantevisualizacion;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class ModuloEstudianteVisualizacion {
+    private JFrame frame;
+    private String nombreEstudiante;
+    private List<String> cursos = new ArrayList<>();
+    private Map<String, List<Actividad>> actividadesPorCurso = new HashMap<>();
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ModuloEstudianteVisualizacion m = new ModuloEstudianteVisualizacion();
+            m.setNombreEstudiante("Ana Pérez");
+            // Aquí se inyectarían cursos y actividades desde el módulo de administración externo
+            m.mostrarUI();
+        });
+    }
+
+    public void setNombreEstudiante(String nombre) {
+        this.nombreEstudiante = nombre;
+    }
+
+    public void setCursosExternos(List<String> cursosExternos) {
+        this.cursos = cursosExternos;
+    }
+
+    public void setActividadesPorCurso(Map<String, List<Actividad>> actividades) {
+        this.actividadesPorCurso = actividades;
+    }
+
+    public void mostrarUI() {
+        frame = new JFrame("Scholarly - Estudiante: " + nombreEstudiante);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(900, 700);
+        frame.setLayout(new BorderLayout());
+
+        JPanel panelCursos = new JPanel();
+        panelCursos.setLayout(new BoxLayout(panelCursos, BoxLayout.Y_AXIS));
+        panelCursos.setBorder(BorderFactory.createTitledBorder("Cursos asignados"));
+
+        for (String curso : cursos) {
+            String[] partes = curso.split("\\|");
+            if (partes.length >= 7) {
+                String nombre = partes[0].trim();
+                String codigo = partes[1].trim();
+                String estudiantes = partes[6].trim();
+                if (estudiantes.contains(nombreEstudiante)) {
+                    JButton botonCurso = new JButton(nombre + " (" + codigo + ")");
+                    botonCurso.addActionListener(e -> mostrarActividadesDelCurso(codigo, nombre));
+                    panelCursos.add(botonCurso);
+                }
+            }
+        }
+
+        frame.add(panelCursos, BorderLayout.NORTH);
+        frame.setVisible(true);
+    }
+
+    public void mostrarActividadesDelCurso(String codigoCurso, String nombreCurso) {
+        JPanel panelActividades = new JPanel();
+        panelActividades.setLayout(new BoxLayout(panelActividades, BoxLayout.Y_AXIS));
+        panelActividades.setBorder(BorderFactory.createTitledBorder("Actividades - " + nombreCurso));
+
+        List<Actividad> actividades = actividadesPorCurso.getOrDefault(codigoCurso, new ArrayList<>());
+        if (actividades.isEmpty()) {
+            panelActividades.add(new JLabel("No hay actividades asignadas."));
+        } else {
+            for (Actividad act : actividades) {
+                JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                JLabel label = new JLabel("- " + act.descripcion + " (Fecha límite: " + act.fechaLimite + ")");
+                JButton btnEntregar = new JButton("Marcar como entregada");
+
+                btnEntregar.addActionListener(e -> entregarActividad(act));
+
+                panel.add(label);
+                panel.add(btnEntregar);
+                panelActividades.add(panel);
+            }
+        }
+
+        JFrame actividadesFrame = new JFrame("Actividades - " + nombreCurso);
+        actividadesFrame.setSize(600, 400);
+        actividadesFrame.add(new JScrollPane(panelActividades));
+        actividadesFrame.setLocationRelativeTo(frame);
+        actividadesFrame.setVisible(true);
+    }
+
+    public void entregarActividad(Actividad act) {
+        act.entregar();
+        JOptionPane.showMessageDialog(frame, "Actividad marcada como entregada.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // Clase interna para actividades
+    public static class Actividad {
+        String descripcion;
+        String fechaLimite;
+        String estado;
+
+        public Actividad(String descripcion, String fechaLimite) {
+            this.descripcion = descripcion;
+            this.fechaLimite = fechaLimite;
+            this.estado = "Pendiente";
+        }
+
+        public void entregar() {
+            try {
+                Date hoy = new Date();
+                Date limite = new SimpleDateFormat("yyyy-MM-dd").parse(fechaLimite);
+                if (hoy.after(limite)) {
+                    estado = "Entrega tardía";
+                } else {
+                    estado = "Entregado a tiempo";
+                }
+            } catch (Exception e) {
+                estado = "Entregado (fecha inválida)";
+            }
+        }
+    }
+}
