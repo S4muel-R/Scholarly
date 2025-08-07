@@ -3,7 +3,7 @@
  */
 
 
-package com.mycompany.recuperar_contrasena;
+package com.ulacit.login;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
