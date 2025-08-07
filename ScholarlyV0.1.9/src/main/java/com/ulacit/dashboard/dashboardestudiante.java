@@ -14,15 +14,16 @@ import com.ulacit.Notificaciones.PanelAnuncios;
 
 import java.awt.*;
 import javax.swing.*;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 /**
  *
  * @author sebas
  */
 
-public class moddashboardclass extends JFrame {
+public class dashboardestudiante extends JFrame {
     private static moddashboardclass instance;
 
-    public moddashboardclass() {
+    public dashboardestudiante() {
         setTitle("MENU DASHBOARD");
         setSize(600, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -111,6 +112,3 @@ public class moddashboardclass extends JFrame {
 
         }
     }}
-
-  
-
