@@ -60,6 +60,7 @@ com\ulacit\reporteDesempeno\reporteDesempeno.class
 com\ulacit\chat\NewJFrame$1.class
 com\ulacit\chat\Pag3$2.class
 com\ulacit\Notificaciones\PanelAnuncios.class
+com\ulacit\roles\EliminarUsuario.class
 com\ulacit\Notificaciones\AnunciosManager$Notificacion.class
 com\ulacit\calificaciones\VentanaPrincipal.class
 com\ulacit\asistenciav2\Asistencia_Cursos.class

@@ -37,21 +37,26 @@ public class CrearUsuario extends JFrame {
         panel.add(txtCorreo);
         panel.add(new JLabel());  // espacio vacío
         panel.add(btnCrear);
+        
+        add(panel);
 
         btnCrear.addActionListener(e -> {
-            String nombre = txtNombre.getText().trim();
-            String correo = txtCorreo.getText().trim();
+        String nombre = txtNombre.getText().trim();
+        String correo = txtCorreo.getText().trim();
 
-            if (!nombre.isEmpty() && !correo.isEmpty()) {
+        if (!nombre.isEmpty() && !correo.isEmpty()) {
+            if (gestor.existeCorreo(correo)) {
+                JOptionPane.showMessageDialog(this, "El correo ya está registrado. No se puede duplicar.");
+            } else {
                 gestor.agregarUsuario(new usuario(nombre, correo));
                 ventanaAdmin.actualizarComboUsuarios();
                 JOptionPane.showMessageDialog(this, "Usuario creado correctamente.");
                 dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Por favor, complete ambos campos.");
             }
-        });
-
-        add(panel);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, complete ambos campos.");
+        }
+    });
+        
     }
 }

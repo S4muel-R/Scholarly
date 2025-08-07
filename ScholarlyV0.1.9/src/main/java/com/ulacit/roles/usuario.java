@@ -27,6 +27,10 @@ public class usuario {
         return correo;
     }
     
+    
+    public void setRol(rol rol) {
+        this.rol = rol;
+    }
 
     public rol getRol() {
         return rol;

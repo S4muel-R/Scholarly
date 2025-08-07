@@ -13,32 +13,47 @@ import java.util.List;
 
 
 public class gestorusuarios {
-    private List<usuario> usuarios;
+    private List<usuario> listaUsuarios;
 
     public gestorusuarios() {
-        usuarios = new ArrayList<>();
+        listaUsuarios = new ArrayList<>();
     }
 
-    public void agregarUsuario(usuario usuario) {
-        usuarios.add(usuario);
+    public void agregarUsuario(usuario u) {
+        listaUsuarios.add(u);
+    }
+    
+    public void eliminarUsuarioPorCorreo(String correo) {
+    listaUsuarios.removeIf(u -> u.getCorreo().equals(correo));
+}
+
+
+    public boolean existeCorreo(String correo) {
+        for (usuario u : listaUsuarios) {
+            if (u.getCorreo().equalsIgnoreCase(correo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<usuario> getUsuarios() {
-        return usuarios;
+        return listaUsuarios;
     }
 
     public List<usuario> getUsuariosConRol() {
-        List<usuario> activos = new ArrayList<>();
-        for (usuario u : usuarios) {
+        List<usuario> conRol = new ArrayList<>();
+        for (usuario u : listaUsuarios) {
             if (u.getRol() != null) {
-                activos.add(u);
+                conRol.add(u);
             }
         }
-        return activos;
+        return conRol;
     }
 
-    public boolean cambiarRolUsuario(usuario usuario, rol nuevoRol) {
-        usuario.asignarRol(nuevoRol); // Solo se permite un rol
-        return true;
+    public void cambiarRolUsuario(usuario u, rol r) {
+        u.setRol(r);
     }
 }
+
+

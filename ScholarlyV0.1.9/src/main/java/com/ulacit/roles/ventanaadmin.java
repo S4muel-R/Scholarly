@@ -46,17 +46,26 @@ public class ventanaadmin extends JFrame {
         panelAsignar.add(new JLabel("Rol:"));
         panelAsignar.add(comboRoles);
         panelAsignar.add(btnAsignar);
-
+        
         add(panelAsignar, BorderLayout.NORTH);
+
+
         
         JButton btnCrearUsuario = new JButton("Crear Usuario");
         btnCrearUsuario.addActionListener(e -> {
          CrearUsuario ventanaCrear = new CrearUsuario(this, gestor); // this es para volver
             ventanaCrear.setVisible(true);
         });
-        add(btnCrearUsuario, BorderLayout.WEST); // Ubícalo en un lugar definido
-
-
+        
+        JButton btnEliminarUsuario = new JButton("Eliminar Usuario");
+        btnEliminarUsuario.addActionListener(e -> {
+            new EliminarUsuario(this, gestor).setVisible(true);
+        });
+        
+        JPanel panelBotones = new JPanel(new GridLayout(2, 1));
+        panelBotones.add(btnCrearUsuario);
+        panelBotones.add(btnEliminarUsuario);
+        add(panelBotones, BorderLayout.WEST);
 
         // Área de reporte
         areaReporte = new JTextArea();
@@ -99,7 +108,7 @@ public class ventanaadmin extends JFrame {
             comboUsuarios.addItem(u);
         }
     }
-
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new ventanaadmin().setVisible(true));
