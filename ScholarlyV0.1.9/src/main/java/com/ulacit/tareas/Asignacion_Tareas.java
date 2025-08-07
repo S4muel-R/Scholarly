@@ -12,6 +12,36 @@ import java.io.*;
  * @author Anderson M
  */
 public class Asignacion_Tareas extends JFrame {
+    // Getter para obtener las tareas guardadas como lista de strings
+    public java.util.List<String> getTareasGuardadas() {
+        java.util.List<String> tareas = new java.util.ArrayList<>();
+        try {
+            java.io.File archivo = new java.io.File("tareas.txt");
+            if (!archivo.exists()) {
+                return tareas;
+            }
+            java.io.BufferedReader lector = new java.io.BufferedReader(new java.io.FileReader(archivo));
+            StringBuilder tareaActual = new StringBuilder();
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                if (linea.startsWith("------------------------")) {
+                    if (tareaActual.length() > 0) {
+                        tareas.add(tareaActual.toString().trim());
+                        tareaActual.setLength(0);
+                    }
+                } else {
+                    tareaActual.append(linea).append("\n");
+                }
+            }
+            if (tareaActual.length() > 0) {
+                tareas.add(tareaActual.toString().trim());
+            }
+            lector.close();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        return tareas;
+    }
 
     private JTextField txtNombreTarea;
     private JTextArea txtInstrucciones;

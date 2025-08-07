@@ -18,6 +18,11 @@ public class ModuloAdministracionCursos  {
     private final List<String> cursos = new ArrayList<>();
     private int cursoSeleccionado = -1;
 
+    // Getter público para la lista de cursos
+    public List<String> getCursos() {
+        return cursos;
+    }
+
     // Instancia de Sistema para acceder a estudiantes reales
     private static final Sistema sistemaEstudiantes = new Sistema();
 
@@ -34,8 +39,8 @@ public class ModuloAdministracionCursos  {
             sistemaEstudiantes.registrarEstudiante(new Estudiante("Laura", "B4"));
         }
         // Formato: nombre | codigo | periodo | horario | aula | profesor | estudiantes (id1,id2,...)
-        cursos.add("Matemática I | MAT101 | 2025-2 | Lunes 8-10am | Aula 101 | Prof. Juan Pérez | A1,A2,A3");
-        cursos.add("Historia Universal | HIS201 | 2025-2 | Miércoles 10-12am | Aula 202 | Prof. Carla Gómez | B1,B2,B3,B4");
+        cursos.add("Matemática I | MAT101 | ICO2025 | Lunes 8-10am | Aula 101 | Prof. Juan Pérez | A1,A2,A3");
+        cursos.add("Historia Universal | HIS201 | IIICO2025 | Miércoles 10-12am | Aula 202 | Prof. Carla Gómez | B1,B2,B3,B4");
     }
 
     // Runnables para refrescar paneles
@@ -62,19 +67,19 @@ public class ModuloAdministracionCursos  {
         // Panel principal y de cursos
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBackground(new Color(187, 222, 251));
+        mainPanel.setBackground(com.ulacit.tema.Tema.getColorFondo());
 
         JPanel panelCursos = new JPanel(new BorderLayout());
-        panelCursos.setBackground(new Color(187, 222, 251));
+        panelCursos.setBackground(com.ulacit.tema.Tema.getColorFondo());
         panelCursos.setPreferredSize(new Dimension(900, 180));
 
         JPanel panelBarras = new JPanel();
         panelBarras.setLayout(new BoxLayout(panelBarras, BoxLayout.Y_AXIS));
-        panelBarras.setBackground(new Color(187, 222, 251));
+        panelBarras.setBackground(com.ulacit.tema.Tema.getColorFondo());
 
         JScrollPane scrollBarras = new JScrollPane(panelBarras);
         scrollBarras.setBorder(null);
-        scrollBarras.getViewport().setBackground(new Color(187, 222, 251));
+        scrollBarras.getViewport().setBackground(com.ulacit.tema.Tema.getColorFondo());
         scrollBarras.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollBarras.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -83,11 +88,11 @@ public class ModuloAdministracionCursos  {
 
         // Panel de información inferior
         JPanel panelInfoWrapper = new JPanel(new BorderLayout());
-        panelInfoWrapper.setBackground(new Color(187, 222, 251));
+        panelInfoWrapper.setBackground(com.ulacit.tema.Tema.getColorFondo());
         panelInfoWrapper.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
 
         JPanel panelInfo = new JPanel(new BorderLayout());
-        panelInfo.setBackground(new Color(187, 222, 251));
+        panelInfo.setBackground(com.ulacit.tema.Tema.getColorFondo());
         panelInfo.setPreferredSize(new Dimension(900, 400));
         panelInfoWrapper.add(panelInfo, BorderLayout.CENTER);
 
@@ -95,9 +100,9 @@ public class ModuloAdministracionCursos  {
         refrescarPanelInfo = () -> {
             panelInfo.removeAll();
             if (cursos.isEmpty()) {
-                panelInfo.setBackground(new Color(187, 222, 251));
+                panelInfo.setBackground(com.ulacit.tema.Tema.getColorFondo());
             } else if (cursoSeleccionado >= 0 && cursoSeleccionado < cursos.size()) {
-                panelInfo.setBackground(new Color(187, 222, 251));
+                panelInfo.setBackground(com.ulacit.tema.Tema.getColorFondo());
                 String[] partes = cursos.get(cursoSeleccionado).split("\\|");
                 String nombre = partes.length > 0 ? partes[0].trim() : "";
                 String codigo = partes.length > 1 ? partes[1].trim() : "";
@@ -431,7 +436,7 @@ public class ModuloAdministracionCursos  {
         JDialog editarCursoDialog = new JDialog(parent, "Editar Curso", true);
         editarCursoDialog.setSize(650, 500);
         editarCursoDialog.setLocationRelativeTo(parent);
-        editarCursoDialog.getContentPane().setBackground(new Color(187, 222, 251));
+        editarCursoDialog.getContentPane().setBackground(com.ulacit.tema.Tema.getColorFondo());
         editarCursoDialog.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(3, 3, 3, 3);
@@ -585,7 +590,7 @@ public class ModuloAdministracionCursos  {
         JDialog crearCursoDialog = new JDialog(parent, "Crear Curso", true);
         crearCursoDialog.setSize(650, 600);
         crearCursoDialog.setLocationRelativeTo(parent);
-        crearCursoDialog.getContentPane().setBackground(new Color(187, 222, 251));
+        crearCursoDialog.getContentPane().setBackground(com.ulacit.tema.Tema.getColorFondo());
         crearCursoDialog.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(3, 3, 3, 3);

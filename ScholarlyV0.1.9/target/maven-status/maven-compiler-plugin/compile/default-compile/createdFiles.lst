@@ -1,4 +1,5 @@
 com\ulacit\chat\Pag1$2.class
+com\ulacit\tareas\Entrega.class
 com\ulacit\calificaciones\Estudiante.class
 com\ulacit\chat\Pag1$5.class
 com\ulacit\editarPerfil\editarPerfil.class
@@ -11,6 +12,7 @@ com\ulacit\calendario\calendario.class
 com\ulacit\academico\ModuloAdministracionCursos$9.class
 com\ulacit\chat\NewJFrame$5.class
 com\ulacit\tareas_pendientes\Estudiante.class
+com\ulacit\visualizacionCursos\visualizacionCursos.class
 com\ulacit\dashboard\paneldashboard$4.class
 com\ulacit\tareas_pendientes\Tarea.class
 com\ulacit\chat\ChatGUI.class
@@ -32,6 +34,7 @@ com\ulacit\asistenciav2\AsistenciaManager.class
 com\ulacit\tareas_pendientes\MooduloTareas_Pendientes.class
 com\ulacit\calificaciones\Calificacion.class
 com\ulacit\menucurso\menucurso.class
+com\ulacit\tareas\Actividad.class
 com\ulacit\dashboard\paneldashboard$5.class
 com\ulacit\chat\Pag1$4.class
 com\ulacit\login\Recuperar_Contrasena$NuevaContrasena.class
@@ -43,6 +46,7 @@ com\ulacit\Notificaciones\PanelAnuncios$AnuncioRenderer.class
 com\ulacit\reporteDesempeno\reporteDesempeno$1.class
 com\ulacit\chat\NewJFrame.class
 com\ulacit\chat\Pag4$3.class
+com\ulacit\visualizacionCursos\visualizacionCursos$1.class
 com\ulacit\calendario\calendario$1.class
 com\ulacit\dashboard\paneldashboard$3.class
 com\ulacit\tareas_pendientes\CursoPanel.class
@@ -78,6 +82,7 @@ com\ulacit\chat\Pag3.class
 com\ulacit\tareas\Asignacion_Tareas.class
 com\ulacit\academico\ModuloAdministracionCursos$7.class
 com\ulacit\chat\Pag4$1.class
+com\ulacit\tareas\Material.class
 com\ulacit\calendario\calendario$2.class
 com\ulacit\dashboard\ModDashboard.class
 com\ulacit\calificaciones\VentanaPrincipal$1.class
