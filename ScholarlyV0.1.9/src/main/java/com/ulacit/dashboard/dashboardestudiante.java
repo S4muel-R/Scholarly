@@ -14,6 +14,7 @@ import com.ulacit.Soporte.SoporteTecnico;
 import com.ulacit.tema.Tema;
 import com.ulacit.confirmacion_entrega.VentanaEntrega;
 import com.ulacit.tareas_pendientes.MooduloTareas_Pendientes;
+import com.ulacit.visualizacionCursos.visualizacionCursos;
 
 
 import java.awt.*;
@@ -138,7 +139,7 @@ public class dashboardestudiante extends JFrame {
     private void manejarClick(String opcion) {
         switch (opcion) {
             case "Cursos":
-                new ModuloAdministracionCursos().showAdminCursosUI();
+                new visualizacionCursos().showVisualizacionCursosUI();
                 
                 break;
                 
