@@ -691,6 +691,38 @@ public class ModuloAdministracionCursos  {
                     );
                     return;
                 }
+
+                // Validación: no puede haber dos cursos con el mismo código
+                for (String c : cursos) {
+                    String[] partes = c.split("\\|");
+                    String codigoExistente = partes.length > 1 ? partes[1].trim() : "";
+                    if (codigoExistente.equalsIgnoreCase(codigo)) {
+                        JOptionPane.showMessageDialog(
+                                crearCursoDialog,
+                                "Ya existe un curso con el mismo código.",
+                                "Código duplicado",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        return;
+                    }
+                }
+
+                // Validación: no puede haber dos cursos en el mismo horario y aula
+                for (String c : cursos) {
+                    String[] partes = c.split("\\|");
+                    String horarioExistente = partes.length > 3 ? partes[3].trim() : "";
+                    String aulaExistente = partes.length > 4 ? partes[4].trim() : "";
+                    if (horarioExistente.equalsIgnoreCase(horario) && aulaExistente.equalsIgnoreCase(aula)) {
+                        JOptionPane.showMessageDialog(
+                                crearCursoDialog,
+                                "Ya existe un curso en el mismo horario y aula.",
+                                "Conflicto de horario y aula",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        return;
+                    }
+                }
+
                 // Convertir selección a ids
                 StringBuilder ids = new StringBuilder();
                 for (String s : seleccionados) {
