@@ -6,6 +6,7 @@ package com.ulacit.roles;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +18,7 @@ public class ventanaadmin extends JFrame {
     private JComboBox<usuario> comboUsuarios;
     private JComboBox<rol> comboRoles;
     private JTextArea areaReporte;
+    private JFrame ventanaAnterior;
 
     public ventanaadmin() {
         gestor = new gestorusuarios();
@@ -26,8 +28,8 @@ public class ventanaadmin extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Datos de ejemplo
-        gestor.agregarUsuario(new usuario("Ana", "ana@mail.com"));
-        gestor.agregarUsuario(new usuario("Carlos", "carlos@mail.com"));
+        gestor.agregarUsuario(new usuario("Edwin", "edwin@gmail.com"));
+        gestor.agregarUsuario(new usuario("Carlos", "carlos@gmail.com"));
 
         setLayout(new BorderLayout());
 
@@ -46,6 +48,15 @@ public class ventanaadmin extends JFrame {
         panelAsignar.add(btnAsignar);
 
         add(panelAsignar, BorderLayout.NORTH);
+        
+        JButton btnCrearUsuario = new JButton("Crear Usuario");
+        btnCrearUsuario.addActionListener(e -> {
+         CrearUsuario ventanaCrear = new CrearUsuario(this, gestor); // this es para volver
+            ventanaCrear.setVisible(true);
+        });
+        add(btnCrearUsuario, BorderLayout.WEST); // Ubícalo en un lugar definido
+
+
 
         // Área de reporte
         areaReporte = new JTextArea();
@@ -56,6 +67,13 @@ public class ventanaadmin extends JFrame {
         JButton btnReporte = new JButton("Generar Reporte");
         btnReporte.addActionListener(e -> generarReporte());
         add(btnReporte, BorderLayout.SOUTH);
+        
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(e -> {
+            this.dispose(); // cierra esta ventana
+            ventanaAnterior.setVisible(true); // vuelve a mostrar la anterior
+        });
+        add(btnVolver, BorderLayout.EAST);
     }
 
     private void asignarRol() {
@@ -74,6 +92,14 @@ public class ventanaadmin extends JFrame {
             areaReporte.append(u.getResumen() + "\n");
         }
     }
+    
+    public void actualizarComboUsuarios() {
+        comboUsuarios.removeAllItems();
+        for (usuario u : gestor.getUsuarios()) {
+            comboUsuarios.addItem(u);
+        }
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new ventanaadmin().setVisible(true));

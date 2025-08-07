@@ -6,6 +6,7 @@ package com.ulacit.dashboard;
 
 
 import com.ulacit.chat.ChatGUI;
+import com.ulacit.login.LoginApp;
 import com.ulacit.roles.ventanaadmin;
 
 
@@ -38,7 +39,7 @@ public class dashboardadmin extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Asignar Roles"};
+        String[] botones = {"Asignar Roles", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -67,8 +68,13 @@ public class dashboardadmin extends JFrame {
         switch (opcion) {
             case "Asignar Roles":
                 new ventanaadmin().setVisible(true);
-                dispose();
+                
                 break;
+                
+            case "Cerrar sesion":
+                SwingUtilities.invokeLater(() -> {
+                new LoginApp().setVisible(true); // Mostrar la ventana de login
+                });
 
         }
     }}

@@ -26,6 +26,7 @@ public class usuario {
     public String getCorreo() {
         return correo;
     }
+    
 
     public rol getRol() {
         return rol;
@@ -38,4 +39,10 @@ public class usuario {
     public String getResumen() {
         return nombre + " - " + correo + " - Rol: " + (rol != null ? rol.name() : "Sin rol");
     }
+    
+        @Override
+    public String toString() {
+        return this.correo;  // o el campo que represente el correo
+    }
+
 }

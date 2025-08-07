@@ -34,28 +34,7 @@ public class dashboardestudiante extends JFrame {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         Color fondoDashboard = new Color(81, 0, 87);
         topPanel.setBackground(fondoDashboard);
-        JButton btnNotificaciones = new JButton("Notificaciones");
-        btnNotificaciones.setPreferredSize(new Dimension(130, 28));
-        btnNotificaciones.setToolTipText("Notificaciones");
-        btnNotificaciones.setFocusable(false);
-        btnNotificaciones.setMargin(new Insets(2, 10, 2, 10));
-        btnNotificaciones.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        btnNotificaciones.setBackground(Color.WHITE);
-        // Acción simple (puedes cambiarla por mostrar panel de notificaciones)
-        btnNotificaciones.addActionListener(e -> {
-            // Abre el módulo de anuncios en una nueva ventana
-            JFrame frame = new JFrame("Gestión de Anuncios");
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setSize(800, 500);
-            frame.setLocationRelativeTo(this);
-            // Usuario y curso de ejemplo (ajusta según tu lógica de sesión)
-            String usuario = "admin";
-            String cursoId = "CURSO-TEST";
-            frame.setContentPane(new PanelAnuncios(usuario, cursoId));
-            frame.setVisible(true);
-        });
-        topPanel.add(btnNotificaciones);
-        add(topPanel, BorderLayout.NORTH);
+
 
         // Panel principal con color
         JPanel mainPanel = new JPanel();

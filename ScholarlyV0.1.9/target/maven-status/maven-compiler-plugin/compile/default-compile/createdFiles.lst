@@ -28,6 +28,7 @@ com\ulacit\menucurso\menucurso.class
 com\ulacit\dashboard\paneldashboard$5.class
 com\ulacit\chat\Pag1$4.class
 com\ulacit\dashboard\dashboardadmin.class
+com\ulacit\roles\CrearUsuario.class
 com\ulacit\chat\Pag2$2.class
 com\ulacit\academico\ModuloAdministracionCursos$5.class
 com\ulacit\chat\Pag1.class
