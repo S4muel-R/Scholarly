@@ -9,12 +9,34 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.ulacit.gestiondegrupos.Sistema;
+import com.ulacit.gestiondegrupos.Estudiante;
 
 // Archivo standalone, sin declaración de paquete
 public class ModuloAdministracionCursos  {
     // Lista de cursos (cada curso es un String con campos separados por '|')
     private final List<String> cursos = new ArrayList<>();
     private int cursoSeleccionado = -1;
+
+    // Instancia de Sistema para acceder a estudiantes reales
+    private static final Sistema sistemaEstudiantes = new Sistema();
+
+    // Constructor para inicializar con cursos de ejemplo
+    public ModuloAdministracionCursos() {
+        // Demo: registrar estudiantes en el sistema (solo si la lista está vacía)
+        if (sistemaEstudiantes.getEstudiantes().isEmpty()) {
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Ana", "A1"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Luis", "A2"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("María", "A3"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Pedro", "B1"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Carla", "B2"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Sofía", "B3"));
+            sistemaEstudiantes.registrarEstudiante(new Estudiante("Laura", "B4"));
+        }
+        // Formato: nombre | codigo | periodo | horario | aula | profesor | estudiantes (id1,id2,...)
+        cursos.add("Matemática I | MAT101 | 2025-2 | Lunes 8-10am | Aula 101 | Prof. Juan Pérez | A1,A2,A3");
+        cursos.add("Historia Universal | HIS201 | 2025-2 | Miércoles 10-12am | Aula 202 | Prof. Carla Gómez | B1,B2,B3,B4");
+    }
 
     // Runnables para refrescar paneles
     private Runnable refrescarCursos;
@@ -212,10 +234,21 @@ public class ModuloAdministracionCursos  {
 
                 // Acción al hacer clic
                 btnAccederCurso.addActionListener(e -> {
-                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(btnAccederCurso);
-                menucurso menu = new menucurso(ventanaActual);
-                menu.setVisible(true);
-                ventanaActual.setVisible(false); // Oculta ventana actual
+                    JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(btnAccederCurso);
+                    // Usar nombres de variables únicos para evitar conflicto con 'partes' externo
+                    String[] partesCurso = cursos.get(cursoSeleccionado).split("\\|");
+                    String nombreCursoSel = partesCurso.length > 0 ? partesCurso[0].trim() : "";
+                    String codigoCursoSel = partesCurso.length > 1 ? partesCurso[1].trim() : "";
+                    String estudiantesStrSel = partesCurso.length > 6 ? partesCurso[6].trim() : "";
+                    java.util.List<String> idsEstudiantesSel = new java.util.ArrayList<>();
+                    if (!estudiantesStrSel.isEmpty()) {
+                        for (String id : estudiantesStrSel.split(",")) {
+                            idsEstudiantesSel.add(id.trim());
+                        }
+                    }
+                    menucurso menu = new menucurso(ventanaActual, nombreCursoSel, codigoCursoSel, idsEstudiantesSel);
+                    menu.setVisible(true);
+                    ventanaActual.setVisible(false); // Oculta ventana actual
                 });
 
                 // Panel para el botón
@@ -447,19 +480,36 @@ public class ModuloAdministracionCursos  {
         JTextField fieldProfesor = new JTextField(profesor, 28);
         editarCursoDialog.add(fieldProfesor, gbc);
 
-        // Estudiantes (editable)
+        // Estudiantes (label y JList en columnas separadas)
         gbc.gridx = 0; gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-        editarCursoDialog.add(new JLabel("Estudiantes (separados por coma):"), gbc);
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        editarCursoDialog.add(new JLabel("Estudiantes (selección múltiple):"), gbc);
 
-        gbc.gridx = 0; gbc.gridy = 7;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea areaEstudiantes = new JTextArea(estudiantes, 3, 28);
-        areaEstudiantes.setLineWrap(true);
-        areaEstudiantes.setWrapStyleWord(true);
-        JScrollPane scrollEstudiantes = new JScrollPane(areaEstudiantes);
+        // Selector de estudiantes
+        gbc.gridx = 1; gbc.gridy = 6;
+        gbc.anchor = GridBagConstraints.WEST;
+        java.util.List<Estudiante> listaEstudiantes = sistemaEstudiantes.getEstudiantes();
+        DefaultListModel<String> modelEst = new DefaultListModel<>();
+        for (Estudiante est : listaEstudiantes) {
+            modelEst.addElement(est.getNombre() + " (" + est.getId() + ")");
+        }
+        JList<String> listEstudiantes = new JList<>(modelEst);
+        listEstudiantes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        listEstudiantes.setVisibleRowCount(5);
+        // Preseleccionar los estudiantes actuales del curso
+        java.util.List<Integer> indicesSel = new ArrayList<>();
+        String[] idsActuales = estudiantes.split(",");
+        for (int i = 0; i < listaEstudiantes.size(); i++) {
+            for (String id : idsActuales) {
+                if (listaEstudiantes.get(i).getId().equals(id.trim())) {
+                    indicesSel.add(i);
+                }
+            }
+        }
+        int[] indicesArr = indicesSel.stream().mapToInt(Integer::intValue).toArray();
+        listEstudiantes.setSelectedIndices(indicesArr);
+        JScrollPane scrollEstudiantes = new JScrollPane(listEstudiantes);
         editarCursoDialog.add(scrollEstudiantes, gbc);
 
         // Panel de botones
@@ -488,9 +538,8 @@ public class ModuloAdministracionCursos  {
                 String nuevoHorario = fieldHorario.getText().trim();
                 String nuevaAula = fieldAula.getText().trim();
                 String nuevoProfesor = fieldProfesor.getText().trim();
-                String nuevosEstudiantes = areaEstudiantes.getText().trim();
-
-                if (nuevoHorario.isEmpty() || nuevaAula.isEmpty() || nuevoProfesor.isEmpty() || nuevosEstudiantes.isEmpty()) {
+                java.util.List<String> seleccionados = listEstudiantes.getSelectedValuesList();
+                if (nuevoHorario.isEmpty() || nuevaAula.isEmpty() || nuevoProfesor.isEmpty() || seleccionados.isEmpty()) {
                     JOptionPane.showMessageDialog(
                             editarCursoDialog,
                             "Por favor, complete todos los campos antes de guardar.",
@@ -499,7 +548,16 @@ public class ModuloAdministracionCursos  {
                     );
                     return;
                 }
-
+                // Convertir selección a ids
+                StringBuilder ids = new StringBuilder();
+                for (String s : seleccionados) {
+                    int idx1 = s.lastIndexOf('(');
+                    int idx2 = s.lastIndexOf(')');
+                    if (idx1 >= 0 && idx2 > idx1) {
+                        ids.append(s.substring(idx1 + 1, idx2)).append(",");
+                    }
+                }
+                if (ids.length() > 0) ids.setLength(ids.length() - 1); // quitar última coma
                 int confirm = JOptionPane.showConfirmDialog(
                         editarCursoDialog,
                         "¿Está seguro que desea guardar los cambios?",
@@ -507,7 +565,7 @@ public class ModuloAdministracionCursos  {
                         JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
-                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + nuevoHorario + " | " + nuevaAula + " | " + nuevoProfesor + " | " + nuevosEstudiantes;
+                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + nuevoHorario + " | " + nuevaAula + " | " + nuevoProfesor + " | " + ids.toString();
                     cursos.set(cursoSeleccionado, resumen);
                     refrescarCursos.run();
                     refrescarPanelInfo.run();
@@ -575,20 +633,23 @@ public class ModuloAdministracionCursos  {
         JTextField fieldProfesor = new JTextField(28);
         crearCursoDialog.add(fieldProfesor, gbc);
 
-        // Estudiantes (label)
+        // Estudiantes (label y JList en columnas separadas)
         gbc.gridx = 0; gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-        crearCursoDialog.add(new JLabel("Estudiantes (separados por coma):"), gbc);
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        crearCursoDialog.add(new JLabel("Estudiantes (selección múltiple):"), gbc);
 
-        // Estudiantes (área de texto)
-        gbc.gridx = 0; gbc.gridy = 7;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea areaEstudiantes = new JTextArea(3, 28);
-        areaEstudiantes.setLineWrap(true);
-        areaEstudiantes.setWrapStyleWord(true);
-        JScrollPane scrollEstudiantes = new JScrollPane(areaEstudiantes);
+        gbc.gridx = 1; gbc.gridy = 6;
+        gbc.anchor = GridBagConstraints.WEST;
+        java.util.List<Estudiante> listaEstudiantes = sistemaEstudiantes.getEstudiantes();
+        DefaultListModel<String> modelEst = new DefaultListModel<>();
+        for (Estudiante est : listaEstudiantes) {
+            modelEst.addElement(est.getNombre() + " (" + est.getId() + ")");
+        }
+        JList<String> listEstudiantes = new JList<>(modelEst);
+        listEstudiantes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        listEstudiantes.setVisibleRowCount(5);
+        JScrollPane scrollEstudiantes = new JScrollPane(listEstudiantes);
         crearCursoDialog.add(scrollEstudiantes, gbc);
 
         // Panel de botones
@@ -620,9 +681,8 @@ public class ModuloAdministracionCursos  {
                 String horario = fieldHorario.getText().trim();
                 String aula = fieldAula.getText().trim();
                 String profesor = fieldProfesor.getText().trim();
-                String estudiantes = areaEstudiantes.getText().trim();
-
-                if (nombre.isEmpty() || codigo.isEmpty() || periodo.isEmpty() || horario.isEmpty() || aula.isEmpty() || profesor.isEmpty() || estudiantes.isEmpty()) {
+                java.util.List<String> seleccionados = listEstudiantes.getSelectedValuesList();
+                if (nombre.isEmpty() || codigo.isEmpty() || periodo.isEmpty() || horario.isEmpty() || aula.isEmpty() || profesor.isEmpty() || seleccionados.isEmpty()) {
                     JOptionPane.showMessageDialog(
                             crearCursoDialog,
                             "Por favor, complete todos los campos antes de guardar.",
@@ -631,7 +691,16 @@ public class ModuloAdministracionCursos  {
                     );
                     return;
                 }
-
+                // Convertir selección a ids
+                StringBuilder ids = new StringBuilder();
+                for (String s : seleccionados) {
+                    int idx1 = s.lastIndexOf('(');
+                    int idx2 = s.lastIndexOf(')');
+                    if (idx1 >= 0 && idx2 > idx1) {
+                        ids.append(s.substring(idx1 + 1, idx2)).append(",");
+                    }
+                }
+                if (ids.length() > 0) ids.setLength(ids.length() - 1); // quitar última coma
                 int confirm = JOptionPane.showConfirmDialog(
                         crearCursoDialog,
                         "¿Está seguro que desea guardar este curso?",
@@ -639,7 +708,7 @@ public class ModuloAdministracionCursos  {
                         JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
-                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + horario + " | " + aula + " | " + profesor + " | " + estudiantes;
+                    String resumen = nombre + " | " + codigo + " | " + periodo + " | " + horario + " | " + aula + " | " + profesor + " | " + ids.toString();
                     cursos.add(resumen);
                     refrescarCursos.run();
                     refrescarPanelInfo.run();
