@@ -91,7 +91,7 @@ public class moddashboardclass extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Cursos", "Anuncios", "Chat", "Calendario", "Cerrar sesion"};
+        String[] botones = {"Cursos", "Chat", "Calendario", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -130,9 +130,7 @@ public class moddashboardclass extends JFrame {
                 new ModuloAdministracionCursos().showAdminCursosUI();
                 dispose();
                 break;
-            case "Anuncios":
-                JOptionPane.showMessageDialog(this, "Abriendo el modulo nuncios");
-                break;
+
             case "Chat":
                 new ChatGUI();
                 dispose();

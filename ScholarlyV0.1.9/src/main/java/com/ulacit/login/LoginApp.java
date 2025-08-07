@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 import com.ulacit.dashboard.moddashboardclass;
+import com.ulacit.login.Recuperar_Contrasena;
 /**
  *
  * @author Anderson M
@@ -114,6 +115,8 @@ public class LoginApp extends JFrame {
             txtClave = new JPasswordField();
             JButton btnLogin = new JButton("Ingresar");
             JLabel lblMsj = new JLabel("", SwingConstants.CENTER);
+            
+            JButton btnRecuperarContra = new JButton("Recuperar Contrasena");
 
             add(new JLabel("Correo:", SwingConstants.CENTER));
             add(txtCorreo);
@@ -121,6 +124,11 @@ public class LoginApp extends JFrame {
             add(txtClave);
             add(btnLogin);
             add(lblMsj);
+            add(btnRecuperarContra);
+            
+            btnRecuperarContra.addActionListener(e-> {
+                new Recuperar_Contrasena().setVisible(true);
+                });
 
             btnLogin.addActionListener(e -> {
                 String correo = txtCorreo.getText().trim();

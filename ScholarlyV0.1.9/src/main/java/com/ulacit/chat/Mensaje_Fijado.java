@@ -23,7 +23,7 @@ public class Mensaje_Fijado extends JFrame {
 
         // Lateral (simulación de tu menú)
         JPanel sidePanel = new JPanel();
-        sidePanel.setBackground(new Color(102, 0, 102));
+        sidePanel.setBackground(com.ulacit.tema.Tema.getColorFondo());
         sidePanel.setPreferredSize(new Dimension(200, 600));
         mainPanel.add(sidePanel, BorderLayout.WEST);
 
