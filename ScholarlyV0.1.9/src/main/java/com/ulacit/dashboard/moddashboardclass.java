@@ -4,23 +4,20 @@
  */
 package com.ulacit.dashboard;
 
-
 import com.ulacit.chat.ChatGUI;
 import com.ulacit.academico.ModuloAdministracionCursos;
 import com.ulacit.calendario.calendario;
 import com.ulacit.login.LoginApp;
 import com.ulacit.Notificaciones.PanelAnuncios;
-
+import com.ulacit.tema.Tema;
 
 import java.awt.*;
 import javax.swing.*;
-/**
- *
- * @author sebas
- */
 
 public class moddashboardclass extends JFrame {
     private static moddashboardclass instance;
+    private JPanel mainPanel;
+    private JPanel topPanel;
 
     public moddashboardclass() {
         setTitle("MENU DASHBOARD");
@@ -29,10 +26,13 @@ public class moddashboardclass extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel superior para notificaciones
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Color fondoDashboard = new Color(81, 0, 87);
-        topPanel.setBackground(fondoDashboard);
+        // Panel superior con dos subpaneles: izq (notificaciones, perfil), der (tema)
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(Tema.getColorFondo());
+
+        // Panel izquierdo (notificaciones y perfil)
+        JPanel panelIzq = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        panelIzq.setOpaque(false);
         JButton btnNotificaciones = new JButton("Notificaciones");
         btnNotificaciones.setPreferredSize(new Dimension(130, 28));
         btnNotificaciones.setToolTipText("Notificaciones");
@@ -62,13 +62,32 @@ public class moddashboardclass extends JFrame {
             new com.ulacit.editarPerfil.editarPerfil().setVisible(true);
         });
 
-        topPanel.add(btnNotificaciones);
-        topPanel.add(btnEditarPerfil);
+        panelIzq.add(btnNotificaciones);
+        panelIzq.add(btnEditarPerfil);
+
+        // Panel derecho (cambiar tema)
+        JPanel panelDer = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        panelDer.setOpaque(false);
+        JButton btnCambiarTema = new JButton("Cambiar Tema");
+        btnCambiarTema.setPreferredSize(new Dimension(130, 28));
+        btnCambiarTema.setToolTipText("Cambiar Tema");
+        btnCambiarTema.setFocusable(false);
+        btnCambiarTema.setMargin(new Insets(2, 10, 2, 10));
+        btnCambiarTema.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        btnCambiarTema.setBackground(Color.WHITE);
+        btnCambiarTema.addActionListener(e -> {
+            Tema.cambiarTema();
+            aplicarTema();
+        });
+        panelDer.add(btnCambiarTema);
+
+        topPanel.add(panelIzq, BorderLayout.WEST);
+        topPanel.add(panelDer, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
 
         // Panel principal con color
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(fondoDashboard);
+        mainPanel = new JPanel();
+        mainPanel.setBackground(Tema.getColorFondo());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
@@ -89,8 +108,16 @@ public class moddashboardclass extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
     }
-    
-        public static moddashboardclass getInstance() {
+
+    private void aplicarTema() {
+        Color colorFondo = Tema.getColorFondo();
+        mainPanel.setBackground(colorFondo);
+        topPanel.setBackground(colorFondo);
+        mainPanel.repaint();
+        topPanel.repaint();
+    }
+
+    public static moddashboardclass getInstance() {
         if (instance == null || !instance.isDisplayable()) {
             instance = new moddashboardclass();
         }
@@ -111,7 +138,7 @@ public class moddashboardclass extends JFrame {
                 dispose();
                 break;
             case "Calendario":
-                new calendario().showCalendarioUI();
+                calendario.showCalendarioUI();
                 dispose();
                 break;
             case "Cerrar sesion":
@@ -122,7 +149,8 @@ public class moddashboardclass extends JFrame {
                 break;
 
         }
-    }}
+    }
+}
 
   
 
