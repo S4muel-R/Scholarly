@@ -19,9 +19,11 @@ public class SoporteTecnico {
 
 
     public static void main(String[] args) {
+        
+        
         JFrame frame = new JFrame("Estudiante-Soporte Técnico");
         frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // ← Mejor que EXIT_ON_CLOSE
         
 
         JTextArea chatArea = new JTextArea();

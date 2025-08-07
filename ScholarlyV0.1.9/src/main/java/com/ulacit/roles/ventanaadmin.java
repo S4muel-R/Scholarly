@@ -25,7 +25,7 @@ public class ventanaadmin extends JFrame {
         setTitle("Gestión de Roles de Usuario");
         setSize(600, 400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Datos de ejemplo
         gestor.agregarUsuario(new usuario("Edwin", "edwin@gmail.com"));

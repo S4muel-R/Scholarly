@@ -76,7 +76,6 @@ public class PanelAnuncios extends JPanel {
         btnVolver.addActionListener(e -> {
             Window win = SwingUtilities.getWindowAncestor(this);
             if (win != null) win.dispose();
-            new moddashboardclass().setVisible(true);
         });
         panelVolver.add(btnVolver);
         panelSur.add(panelVolver, BorderLayout.WEST);
@@ -237,7 +236,7 @@ public class PanelAnuncios extends JPanel {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Gestión de Anuncios - Demo");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setSize(800, 500);
             frame.setLocationRelativeTo(null);
             // Usuario y curso de ejemplo

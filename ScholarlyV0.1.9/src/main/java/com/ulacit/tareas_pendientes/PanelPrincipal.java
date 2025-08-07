@@ -1,4 +1,4 @@
-package moodulo.tareas_pendientes;
+package com.ulacit.tareas_pendientes;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class PanelPrincipal extends JFrame {
 
         setTitle("Organizador de Tareas por Curso");
         setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         inicializarUI();

@@ -228,9 +228,6 @@ public static java.util.List<String> mensajesLeidos = new java.util.ArrayList<>(
     private void ExitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitbtnActionPerformed
         // TODO add your handling code here:
         this.dispose(); // cierrra la ventana
-
-        // Abre el Dashboard
-        new moddashboardclass().setVisible(true);
     }//GEN-LAST:event_ExitbtnActionPerformed
 
     private void Pag3btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pag3btnActionPerformed

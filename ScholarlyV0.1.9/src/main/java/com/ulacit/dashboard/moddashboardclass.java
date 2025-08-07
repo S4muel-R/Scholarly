@@ -128,16 +128,16 @@ public class moddashboardclass extends JFrame {
         switch (opcion) {
             case "Cursos":
                 new ModuloAdministracionCursos().showAdminCursosUI();
-                dispose();
+                
                 break;
 
             case "Chat":
                 new ChatGUI();
-                dispose();
+                
                 break;
             case "Calendario":
                 calendario.showCalendarioUI();
-                dispose();
+                
                 break;
             case "Cerrar sesion":
                 SwingUtilities.invokeLater(() -> {

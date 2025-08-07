@@ -1,4 +1,4 @@
-package modulo.confirmacion_entrega;
+package com.ulacit.confirmacion_entrega;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

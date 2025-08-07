@@ -24,7 +24,7 @@ public class CrearUsuario extends JFrame {
         setTitle("Crear Usuario");
         setSize(300, 200);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridLayout(3, 2));
         JTextField txtNombre = new JTextField();

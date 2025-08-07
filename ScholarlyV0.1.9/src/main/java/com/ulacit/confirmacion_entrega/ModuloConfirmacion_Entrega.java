@@ -1,4 +1,5 @@
-package modulo.confirmacion_entrega;
+package com.ulacit.confirmacion_entrega;
+
 import javax.swing.*;
 import java.time.LocalDateTime;
 public class ModuloConfirmacion_Entrega {

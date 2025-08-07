@@ -12,6 +12,8 @@ import com.ulacit.login.LoginApp;
 import com.ulacit.Notificaciones.PanelAnuncios;
 import com.ulacit.Soporte.SoporteTecnico;
 import com.ulacit.tema.Tema;
+import com.ulacit.confirmacion_entrega.VentanaEntrega;
+import com.ulacit.tareas_pendientes.MooduloTareas_Pendientes;
 
 
 import java.awt.*;
@@ -99,7 +101,7 @@ public class dashboardestudiante extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
-        String[] botones = {"Cursos", "Chat", "Calendario", "Soporte Tecnico", "Cerrar sesion"};
+        String[] botones = {"Cursos", "Chat", "Calendario","Entregar Tarea", "Tareas Pendientes", "Soporte Tecnico", "Cerrar sesion"};
 
         for (String texto : botones) {
             JButton boton = new JButton(texto);
@@ -137,20 +139,29 @@ public class dashboardestudiante extends JFrame {
         switch (opcion) {
             case "Cursos":
                 new ModuloAdministracionCursos().showAdminCursosUI();
-                dispose();
+                
                 break;
                 
             case "Chat":
                 new ChatGUI();
-                dispose();
+               
                 break;
             case "Calendario":
                 new calendario().showCalendarioUI();
-                dispose();
+                
                 break;
                 
             case "Soporte Tecnico":
-                new SoporteTecnico();
+                
+                SoporteTecnico.main(null);
+                break;
+                
+            case "Entregar Tarea":
+                new VentanaEntrega().setVisible(true);
+                break;
+                
+            case "Tareas Pendientes":
+                MooduloTareas_Pendientes.main(null);
                 break;
                 
             case "Cerrar sesion":

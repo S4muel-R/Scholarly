@@ -20,7 +20,7 @@ public class soportecnico2admin {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Soporte Tecnico-Estudiante");
         frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JTextArea chatArea = new JTextArea();
         chatArea.setEditable(false);
