@@ -40,20 +40,30 @@ public class moddashboardclass extends JFrame {
         btnNotificaciones.setMargin(new Insets(2, 10, 2, 10));
         btnNotificaciones.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         btnNotificaciones.setBackground(Color.WHITE);
-        // Acción simple (puedes cambiarla por mostrar panel de notificaciones)
         btnNotificaciones.addActionListener(e -> {
-            // Abre el módulo de anuncios en una nueva ventana
             JFrame frame = new JFrame("Gestión de Anuncios");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setSize(800, 500);
             frame.setLocationRelativeTo(this);
-            // Usuario y curso de ejemplo (ajusta según tu lógica de sesión)
             String usuario = "admin";
             String cursoId = "CURSO-TEST";
             frame.setContentPane(new PanelAnuncios(usuario, cursoId));
             frame.setVisible(true);
         });
+
+        JButton btnEditarPerfil = new JButton("Editar Perfil");
+        btnEditarPerfil.setPreferredSize(new Dimension(130, 28));
+        btnEditarPerfil.setToolTipText("Editar Perfil");
+        btnEditarPerfil.setFocusable(false);
+        btnEditarPerfil.setMargin(new Insets(2, 10, 2, 10));
+        btnEditarPerfil.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        btnEditarPerfil.setBackground(Color.WHITE);
+        btnEditarPerfil.addActionListener(e -> {
+            new com.ulacit.editarPerfil.editarPerfil().setVisible(true);
+        });
+
         topPanel.add(btnNotificaciones);
+        topPanel.add(btnEditarPerfil);
         add(topPanel, BorderLayout.NORTH);
 
         // Panel principal con color
