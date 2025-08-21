@@ -21,7 +21,7 @@ public class VentanaEntrega extends JFrame {
         setTitle("Entrega de Actividades");
         setSize(500, 300);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
         actividad1 = new Actividad("Tarea 1: Investigación", LocalDateTime.now().plusDays(2));

@@ -23,6 +23,13 @@ public class ModuloGestiondeGrupos extends JFrame {
         setSize(700, 500);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        
+        plataforma.registrarEstudiante(new Estudiante("A1", "001"));
+        plataforma.registrarEstudiante(new Estudiante("A2", "002"));
+        plataforma.registrarEstudiante(new Estudiante("A3", "003"));
+
+        
+        actualizarCombos();
 
         // Panel superior con tabs
         add(crearTabs(), BorderLayout.CENTER);
@@ -42,37 +49,11 @@ public class ModuloGestiondeGrupos extends JFrame {
 
     private JTabbedPane crearTabs() {
         JTabbedPane tabs = new JTabbedPane();
-        tabs.add("Registrar estudiante", panelRegistrarEstudiante());
         tabs.add("Crear grupo", panelCrearGrupo());
         tabs.add("Modificar grupos", panelModificarGrupo());
         return tabs;
     }
 
-    private JPanel panelRegistrarEstudiante() {
-        JPanel p = new JPanel(new GridLayout(3, 2, 5, 5));
-        JTextField txtNombre = new JTextField();
-        JTextField txtId = new JTextField();
-        JButton btn = new JButton("Registrar");
-        btn.addActionListener(e -> {
-            String nombre = txtNombre.getText().trim();
-            String id = txtId.getText().trim();
-            if (!nombre.isEmpty() && !id.isEmpty()) {
-                if (plataforma.buscarEstudiante(id) == null) {
-                    plataforma.registrarEstudiante(new Estudiante(nombre, id));
-                    actualizarCombos();
-                    mensaje("Estudiante registrado");
-                    txtNombre.setText("");
-                    txtId.setText("");
-                } else {
-                    mensaje("Ya existe un estudiante con ese ID");
-                }
-            } else mensaje("Complete ambos campos");
-        });
-        p.add(new JLabel("Nombre:")); p.add(txtNombre);
-        p.add(new JLabel("ID:")); p.add(txtId);
-        p.add(new JLabel()); p.add(btn);
-        return p;
-    }
 
     private JPanel panelCrearGrupo() {
         JPanel p = new JPanel(new BorderLayout(5, 5));
